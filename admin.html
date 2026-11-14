@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pakistan Clinic Korea Admin</title>
+<meta name="theme-color" content="#14503A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='%23235B45' stroke='%23C9A24A' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' text-anchor='middle' fill='%23C9A24A'%3EHS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  /* Layout: a working desk in the brand colours. Green header, cream desk, paper cards;
+     each booking is one row that opens in place. Status is carried by a pill and the card's edge. */
+  --green:#14503A; --green-2:#235B45; --green-3:#0F3F2E;
+  --gold:#C9A24A; --gold-ink:#7A5B17; --gold-tint:#F3E7C3;
+  --desk:#F1EBDA; --paper:#FFFCF3; --ink:#17382B; --muted:#5C6B61; --line:#DCD2B6; --taken:#E9E2CD;
+  --red:#B03030; --red-ink:#7E1F1F; --red-tint:#F5DFD9;
+  --font:'Poppins','Noto Naskh Arabic','Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',Arial,sans-serif;
+  --font-mono:'DM Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--desk);color:var(--ink);font-family:var(--font);font-size:15.5px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px}
+h1,h2{margin:0;text-wrap:balance}
+
+.demo{background:var(--gold-tint);color:var(--ink);font-size:12.5px;text-align:center;padding:6px 16px}
+.top{background:var(--green);color:var(--paper);border-bottom:2px solid var(--gold)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-block:12px}
+.badge{flex:none;width:42px;height:42px;border:2px solid var(--gold);border-radius:11px;display:grid;place-items:center;color:var(--gold);font:700 15.5px/1 var(--font);background:var(--green-2)}
+.brand{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.brand b{font-weight:600;font-size:15.5px;letter-spacing:.04em;line-height:1.2}
+.brand span{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;color:var(--gold)}
+.top button{appearance:none;border:1.5px solid rgba(201,162,74,.7);background:transparent;color:var(--paper);border-radius:10px;min-height:38px;padding:4px 12px;font-size:13.5px;cursor:pointer}
+
+main{padding-block:16px 40px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.card h1{font-size:21px;font-weight:700}
+.card h2{font-size:17px;font-weight:600}
+.auth{max-width:420px;margin:24px auto;width:100%}
+.hint{margin:0;color:var(--muted);font-size:13.5px}
+.empty{margin:0;color:var(--muted);background:var(--paper);border:1px dashed var(--line);border-radius:14px;padding:18px;text-align:center}
+.sec{font:500 12px/1.4 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);margin-top:6px}
+.err{margin:0;background:var(--red-tint);color:var(--red-ink);border-radius:10px;padding:10px 12px;font-size:14px;font-weight:500}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{appearance:none;text-align:start;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.stat b{font-size:26px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--muted)}
+.stat.hot{background:var(--green);border-color:var(--green);color:var(--paper)}
+.stat.hot span{color:#D5DFD2}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.tabs button{appearance:none;flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:999px;min-height:40px;padding:6px 14px;cursor:pointer;font-size:14px;font-weight:500}
+.tabs button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--paper)}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{appearance:none;border:1.5px solid var(--green);background:var(--green);color:var(--paper);border-radius:11px;min-height:46px;padding:8px 16px;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+.btn.sm{min-height:40px;padding:6px 12px;font-size:13.5px}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--green-3)}
+.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
+.btn.quiet{background:transparent;border-color:transparent;color:var(--red-ink);text-decoration:underline;font-weight:500}
+.btn:disabled{opacity:.6;cursor:progress}
+.link{appearance:none;border:0;background:none;padding:6px 0;color:var(--green);font-weight:500;font-size:14px;text-decoration:underline;cursor:pointer;align-self:flex-start}
+#view{display:flex;flex-direction:column;gap:10px}
+
+.bk{background:var(--paper);border:1px solid var(--line);border-inline-start:5px solid var(--line);border-radius:14px;overflow:hidden}
+.bk.s-pending{border-inline-start-color:var(--gold)}
+.bk.s-proposed{border-inline-start-color:var(--gold)}
+.bk.s-confirmed{border-inline-start-color:var(--green)}
+.bk.s-cancelled,.bk.s-noshow{border-inline-start-color:var(--red)}
+.bk-h{appearance:none;width:100%;text-align:start;border:0;background:transparent;padding:12px 14px;cursor:pointer;display:grid;gap:2px}
+.bk-h b{font-weight:600;font-size:15.5px}
+.bk-h .dim{color:var(--muted);font-size:13px}
+.bk.open .bk-h{border-bottom:1px solid var(--line)}
+.pill{justify-self:start;align-self:flex-start;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;background:var(--taken);color:var(--ink);margin-bottom:2px}
+.pill.pending{background:var(--gold);color:var(--green-3)}
+.pill.proposed{background:var(--gold-tint);color:var(--gold-ink);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.pill.confirmed{background:var(--green);color:var(--paper)}
+.pill.cancelled,.pill.noshow{background:var(--red-tint);color:var(--red-ink)}
+.bk-d{padding:14px;display:flex;flex-direction:column;gap:14px}
+.info{margin:0;display:grid;grid-template-columns:minmax(110px,auto) 1fr;gap:6px 14px;font-size:14.5px}
+.info dt{color:var(--muted)}
+.info dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+.next{background:var(--gold-tint);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.next p{margin:0;font-size:14px}
+.flag{justify-self:start;font-size:12px;font-weight:600;color:var(--red-ink);background:var(--red-tint);border-radius:999px;padding:1px 9px}
+.panel{display:flex;flex-direction:column;gap:8px}
+.rem{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.rem>div{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 170px}
+.rem>div b{font-weight:600;font-size:14.5px}
+.rem>div span{font-size:12.5px;color:var(--muted)}
+.rem .st-ok{font-size:13px;font-weight:600;color:var(--green)}
+.rem .st-wait{font-size:13px;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:5px}
+.field>label,.field>.lab{font-weight:600;font-size:14px}
+input[type=text],input[type=password],input[type=tel],input[type=email],input[type=date],input[type=url],input[type=search],select,textarea{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:9px 12px;color:var(--ink)}
+textarea{min-height:76px;resize:vertical;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.check input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;min-height:38px;cursor:pointer;font-size:14px}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--paper)}
+.warnbox{margin:0;background:var(--red-tint);color:var(--red-ink);border-radius:10px;padding:10px 12px;font-size:14px}
+
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-h b{font-weight:600;font-size:16.5px}
+.cal-h button{appearance:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:19px;font-weight:600}
+.dow,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dow span{text-align:center;font-size:11.5px;color:var(--muted)}
+.day{appearance:none;border:1.5px solid var(--line);border-radius:10px;background:#fff;min-height:50px;padding:4px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer}
+.day b{font-weight:600;font-size:14.5px;line-height:1;font-variant-numeric:tabular-nums}
+.day i{font-style:normal;font-size:10.5px;line-height:1;min-width:18px;padding:2px 5px;border-radius:999px;background:var(--green);color:var(--paper);font-weight:600}
+.day i.z{background:transparent;color:transparent}
+.day.off{background:transparent;border-style:dashed;color:#8C927F}
+.day.hol{background:var(--red-tint);border-color:var(--red-tint)}
+.day.blk{background:var(--taken)}
+.day.today b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.day.sel{border-color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin:0;padding:0;list-style:none}
+.legend i{display:inline-block;width:13px;height:13px;border-radius:4px;margin-inline-end:6px;vertical-align:-2px;border:1.5px solid var(--line);background:#fff}
+.legend .l-o i{border-style:dashed;background:transparent}
+.legend .l-h i{background:var(--red-tint);border-color:var(--red-tint)}
+.legend .l-b i{background:var(--taken);border-color:var(--taken)}
+.list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.list li{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px;font-size:14.5px}
+.list li:last-child{border-bottom:0;padding-bottom:0}
+
+.modal{position:fixed;inset:0;background:rgba(15,63,46,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.sheet{background:var(--paper);width:100%;max-width:560px;max-height:92%;overflow-y:auto;border-radius:18px 18px 0 0;padding:18px 16px 22px;display:flex;flex-direction:column;gap:14px}
+.sheet h2{font-size:18px;font-weight:700}
+@media (min-width:640px){.modal{align-items:center}.sheet{border-radius:18px}}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--green-3);color:var(--paper);border-radius:12px;padding:10px 16px;font-size:14.5px;max-width:calc(100% - 32px);z-index:30;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+<div class="demo" id="demo" hidden>Preview with sample patients. Nothing on this page is real, saved or sent.</div>
+<header class="top"><div class="wrap">
+  <div class="badge" aria-hidden="true">HS</div>
+  <div class="brand"><b>PAKISTAN CLINIC KOREA</b><span>ADMIN · BOOKINGS</span></div>
+  <button type="button" id="refresh" data-refresh="1" hidden>Refresh</button>
+</div></header>
+<main class="wrap" id="app"></main>
+<div id="modal"></div>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<!--CONFIG-->
+<script src="core.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+const P=PCK;
+const API=(window.PCK_CONFIG&&window.PCK_CONFIG.api)||"";
+const DEMO=!API;
+const engine=DEMO?P.createEngine(P.demoEnv()):null;
+function call(req){
+  if(DEMO) return new Promise(function(res){setTimeout(function(){res(engine.handle(JSON.parse(JSON.stringify(req))));},250);});
+  const once=function(){
+    const ctl=new AbortController(), tm=setTimeout(function(){ctl.abort();},30000);
+    return fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(req),redirect:"follow",signal:ctl.signal})
+      .then(function(r){if(!r.ok)throw new Error("http "+r.status);return r.json();})
+      .finally(function(){clearTimeout(tm);});
+  };
+  return once();
+}
+const ses={get:function(k){try{return sessionStorage.getItem(k)||"";}catch(e){return "";}},set:function(k,v){try{sessionStorage.setItem(k,v);}catch(e){/* stays signed in for this page load only */}},del:function(k){try{sessionStorage.removeItem(k);}catch(e){/* nothing stored */}}};
+const esc=P.esc;
+const $=function(s){return document.querySelector(s);};
+
+const STATUS={pending:"New request",proposed:"Waiting for customer",confirmed:"Confirmed",done:"Done",noshow:"No-show",cancelled:"Cancelled"};
+const ERR={conflict:"That time overlaps another booking or a blocked time.",time:"Choose a valid date and time.",notfound:"This booking no longer exists. Press Refresh.",invalid:"That is not possible for this booking in its current status.",
+  server:"The server had a problem. Try again.",network:"No connection to the server. Check the internet and try again.",name:"Enter the patient's name (at least 2 letters).",phone:"Enter a phone number with 8 to 15 digits, or leave it empty.",
+  email:"Enter a valid email address.",cat:"Choose the treatment.",loc:"Choose the location.",badpass:"Wrong password.",locked:"Too many wrong tries. Wait 15 minutes and try again.",badcode:"That setup code is not correct.",
+  weak:"Use at least 8 characters.",nopass:"No password has been created yet.",mismatch:"The two passwords are not the same.",dob:"The date of birth is not valid."};
+const LANGS={en:"English",ur:"Urdu",ko:"Korean"};
+const DURS=[["60","1 hour"],["90","1.5 hours"],["120","2 hours"],["180","3 hours"],["240","4 hours"],["360","6 hours"],["480","8 hours"]];
+const TIMES=(function(){const o=[];for(let t=360;t<=1320;t+=30)o.push([P.hm(t),P.fmtTime(t,"en")]);return o;})();
+
+const A={phase:"boot",token:"",hasPassword:true,data:null,tab:"new",open:null,modal:null,busy:false,q:"",filt:"all",limit:60,month:"",day:"",
+  auth:{code:"",pw:"",pw2:"",err:""},after:null,notes:{},setForm:null,loadedAt:0};
+
+/* ---------- data helpers ---------- */
+const B=function(){return A.data?A.data.bookings:[];};
+const find=function(ref){return B().filter(function(b){return b.ref===ref;})[0]||null;};
+const byWhen=function(a,b){const x=a.date+" "+a.start,y=b.date+" "+b.start;return x<y?-1:x>y?1:0;};
+const durText=function(m){m=Number(m);return m%60===0?(m/60)+" h":(Math.round(m/6)/10)+" h";};
+const timeText=function(b){const t=P.parseHm(b.start);return isNaN(t)?b.start:P.fmtTime(t,"en");};
+const whenText=function(b){return P.fmtDate(b.date,"en")+" · "+timeText(b)+(Number(b.dur)&&Number(b.dur)!==P.CFG.block?" ("+durText(b.dur)+")":"");};
+const catName=function(b){const c=P.cat(b.cat);return c?c.name.en:b.cat;};
+const meetOf=function(b){return P.meetText(P.clinicFor(b.cat,b.loc),"en");};
+const msgKind=function(st){return {pending:"received",proposed:"proposed",confirmed:"confirmed",cancelled:"cancelled"}[st]||"";};
+function busyFor(except){
+  const out=[];
+  B().forEach(function(b){if(!P.HOLD[b.status]||b.ref===except)return;const s=P.parseHm(b.start);if(!isNaN(s))out.push({d:b.date,s:s,m:Number(b.dur)||P.CFG.block});});
+  (A.data.blocks||[]).forEach(function(k){const s=P.parseHm(k.start),e=P.parseHm(k.end);if(!isNaN(s)&&!isNaN(e)&&e>s)out.push({d:k.date,s:s,m:e-s});});
+  return out;
+}
+const holidayOf=function(ds){return (A.data.holidays||[]).filter(function(h){return h.date===ds;})[0]||null;};
+function dayNote(ds){
+  if(!P.isDate(ds))return "";
+  const h=holidayOf(ds),w=P.dow(ds),n=[];
+  if(P.CFG.off.indexOf(w)>=0)n.push("This is one of your days off ("+P.DOW.en[w]+").");
+  if(h)n.push("Public holiday: "+h.name+".");
+  return n.join(" ");
+}
+
+/* ---------- server ---------- */
+function api(action,extra){
+  return call(Object.assign({action:action,token:A.token},extra||{})).then(function(r){
+    if(r&&r.error==="auth"){A.token="";ses.del("pck-admin");A.phase="login";A.modal=null;A.busy=false;A.auth.err="";render();throw new Error("auth");}
+    return r;
+  });
+}
+function toast(text){
+  const el=$("#toast");if(!text){el.hidden=true;return;}
+  el.textContent=text;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(function(){el.hidden=true;},4500);
+}
+function send(action,payload,okMsg,after){
+  if(A.busy)return Promise.resolve();
+  A.busy=true;renderModal();
+  return api(action,payload).then(function(r){
+    A.busy=false;
+    if(r&&r.ok){if(r.data){A.data=r.data;A.loadedAt=Date.now();}A.modal=null;if(after)after(r);toast(typeof okMsg==="function"?okMsg(r):okMsg);render();}
+    else{const e=(r&&r.error)||"server";if(A.modal){A.modal.err=e;renderModal();}else{toast(ERR[e]||ERR.server);render();}}
+  }).catch(function(e){
+    A.busy=false;if(e&&e.message==="auth")return;
+    if(A.modal){A.modal.err="network";renderModal();}else{toast(ERR.network);render();}
+  });
+}
+function act(req,kind){
+  return send("admin.act",req,function(r){
+    if(r.deleted)return "Booking deleted.";
+    if(kind==="confirmed")return r.emailed?"Confirmed. Email sent to the customer.":"Confirmed.";
+    if(kind==="proposed")return r.emailed?"New time offered. Email sent to the customer.":"New time offered.";
+    if(kind==="cancelled")return r.emailed?"Cancelled. Email sent to the customer.":"Cancelled.";
+    return "Saved.";
+  },function(r){
+    if(r.deleted){A.open=null;A.after=null;return;}
+    A.open=req.ref;A.after=kind?{ref:req.ref,kind:kind,emailed:!!r.emailed}:null;
+    reveal(req.ref);
+  });
+}
+/* After a change, move to the tab where the booking now lives so its "next step" stays in view. */
+function reveal(ref){
+  const b=find(ref);if(!b)return;
+  const isNew=b.status==="pending"||b.status==="proposed",isUp=b.status==="confirmed",toAll=function(){A.tab="all";A.filt="all";A.q="";};
+  if(A.tab==="new"&&!isNew){if(isUp)A.tab="up";else toAll();}
+  else if(A.tab==="up"&&!isUp){if(isNew)A.tab="new";else toAll();}
+  else if(A.tab==="cal"){if(b.status==="cancelled")toAll();else{A.day=b.date;A.month=b.date.slice(0,7);}}
+  else if(A.tab==="all"&&A.filt!=="all"&&A.filt!==b.status)A.filt="all";
+}
+function load(silent){
+  return api("admin.data").then(function(r){
+    if(r&&r.ok){A.data=r.data;A.loadedAt=Date.now();if(A.phase!=="in"){A.phase="in";A.month=r.data.today.slice(0,7);A.day=r.data.today;}if(!silent)toast("Up to date.");render();}
+    else if(!silent){toast(ERR.server);}
+  }).catch(function(e){if(e&&e.message==="auth")return;if(A.phase!=="in"){A.phase="error";render();}else if(!silent)toast(ERR.network);});
+}
+function copyText(text,title){
+  const fallback=function(){A.modal={type:"text",title:title,text:text};renderModal();};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast("Copied.");},fallback);return;}}catch(e){/* fall through to the text box */}
+  fallback();
+}
+
+/* ---------- small builders ---------- */
+const field=function(label,control,hint){return '<div class="field"><span class="lab">'+esc(label)+'</span>'+control+(hint?'<p class="hint">'+esc(hint)+'</p>':"")+'</div>';};
+const select=function(attr,opts,cur){return '<select '+attr+'>'+opts.map(function(o){return '<option value="'+esc(o[0])+'"'+(String(cur)===String(o[0])?" selected":"")+'>'+esc(o[1])+'</option>';}).join("")+'</select>';};
+const timeSelect=function(key,cur){const opts=TIMES.some(function(o){return o[0]===cur;})||!cur?TIMES:[[cur,cur]].concat(TIMES);return select('data-m="'+key+'" data-re="1" aria-label="Time"',opts,cur);};
+const sumLine=function(b){return '<p class="hint"><b>'+esc(b.name)+'</b> · '+esc(catName(b))+'<br>'+esc(whenText(b))+' · '+esc(meetOf(b))+'</p>';};
+function notifyRow(b,m){
+  if(b.contact==="email"&&b.email)return '<label class="check"><input type="checkbox" data-m="notify"'+(m.notify?" checked":"")+'><span>Email the customer now ('+esc(b.email)+')</span></label>';
+  return '<p class="hint">This customer chose WhatsApp. After you save, a ready WhatsApp message appears on the booking.</p>';
+}
+const statusLink=function(){const u=(A.data&&A.data.settings&&A.data.settings.bookingUrl)||"";return u?u.replace(/#.*$/,"")+"#status":"";};
+const missed=function(b){return P.noShowCount(B(),b.phone,b.ref);};
+const msgText=function(kind,b){return P.customerMessage(kind,b,b.lang,{link:statusLink()}).text;};
+function waButton(b,kind,cls,label){
+  const d=P.normPhone(b.phone);if(d.length<8)return "";
+  const text=kind?msgText(kind,b):"";
+  return '<a class="btn '+cls+'" target="_blank" rel="noopener" href="'+esc(P.waLink(d,text))+'">'+esc(label)+'</a>';
+}
+
+/* ---------- booking card ---------- */
+function detail(b){
+  const rows=P.detailLines(b,A.data.today).filter(function(r){return r[0]!=="Date"&&r[0]!=="Time";});
+  rows.push(["Message language",LANGS[b.lang]||b.lang],["Requested at",b.createdAt],["Added by",b.origin==="manual"?"HS (by hand)":"Website"]);
+  const ms=missed(b);if(ms)rows.unshift(["Missed visits before",ms+" (same phone number)"]);
+  if(b.cancelledBy)rows.push(["Cancelled by",(b.cancelledBy==="customer"?"The customer, online":"HS")+(b.cancelledAt?" · "+b.cancelledAt:"")]);
+  if(b.remindedAt)rows.push(["Reminder email sent",b.remindedAt]);
+  const ref=esc(b.ref),note=A.notes[b.ref]!==undefined?A.notes[b.ref]:(b.adminNote||""),kind=msgKind(b.status),phone=P.normPhone(b.phone);
+  let h='<div class="bk-d">';
+  if(A.after&&A.after.ref===b.ref){
+    if(A.after.emailed)h+='<div class="next"><b>Email sent to the customer.</b></div>';
+    else if(phone.length>=8&&kind)h+='<div class="next"><b>Next step</b><p>The customer has not been told yet. Send the ready message on WhatsApp.</p>'+waButton(b,kind,"gold","Send WhatsApp message")+'</div>';
+    else h+='<div class="next"><b>Next step</b><p>There is no phone number or email for this customer. Tell them yourself.</p></div>';
+  }
+  h+='<dl class="info">'+rows.map(function(r){return "<dt>"+esc(r[0])+"</dt><dd>"+esc(r[1]).replace(/\n/g,"<br>")+"</dd>";}).join("")+'</dl>';
+  h+='<div class="field"><label for="n-'+ref+'">HS note (only you see it)</label><textarea id="n-'+ref+'" data-note="'+ref+'" maxlength="600">'+esc(note)+'</textarea><div class="row"><button type="button" class="btn sm ghost" data-act="note" data-ref="'+ref+'">Save note</button></div></div>';
+  const btn=function(a,label,cls){return '<button type="button" class="btn sm '+(cls||"ghost")+'" data-act="'+a+'" data-ref="'+ref+'">'+label+'</button>';};
+  let acts="";
+  if(b.status==="pending"||b.status==="proposed")acts=btn("confirm","Confirm"," ")+btn("propose","Offer another time")+btn("cancel","Cancel booking");
+  else if(b.status==="confirmed")acts=btn("reschedule","Change time")+btn("done","Mark done")+btn("noshow","No-show")+btn("cancel","Cancel booking");
+  else if(b.status==="cancelled")acts=btn("reopen","Reopen as new request");
+  else if(b.status==="done")acts=btn("noshow","Change to no-show");
+  else if(b.status==="noshow")acts=btn("done","Change to done");
+  h+='<div class="row">'+acts+'</div>';
+  if(b.status==="confirmed"&&b.date>=A.data.today)h+='<div class="row">'+waButton(b,"reminder","sm ghost","WhatsApp reminder")+'<button type="button" class="btn sm ghost" data-copy="rem" data-ref="'+ref+'">Copy reminder</button></div>';
+  h+='<div class="row">'+waButton(b,kind,"sm ghost","WhatsApp customer")+(kind?'<button type="button" class="btn sm ghost" data-copy="msg" data-ref="'+ref+'">Copy customer message</button>':"")
+    +'<button type="button" class="btn sm ghost" data-copy="ko" data-ref="'+ref+'">Copy Korean summary for clinic</button>'
+    +(phone.length>=8?'<a class="btn sm ghost" href="tel:+'+esc(phone)+'">Call</a>':"")
+    +'<button type="button" class="btn sm quiet" data-act="delete" data-ref="'+ref+'">Delete</button></div>';
+  return h+'</div>';
+}
+function card(b){
+  const open=A.open===b.ref;
+  return '<article class="bk s-'+esc(b.status)+(open?" open":"")+'"><button type="button" class="bk-h" data-open="'+esc(b.ref)+'" aria-expanded="'+open+'"><span class="pill '+esc(b.status)+'">'+esc(STATUS[b.status]||b.status)+'</span><b>'+esc(whenText(b))+'</b><span>'+esc(b.name)+' · '+esc(catName(b))+'</span><span class="dim">'+esc(meetOf(b))+'</span>'+(function(){const n=missed(b);return n?'<span class="flag">Missed '+n+' visit'+(n>1?"s":"")+' before</span>':"";})()+'</button>'+(open?detail(b):"")+'</article>';
+}
+
+/* ---------- views ---------- */
+function vAuth(){
+  const a=A.auth,setup=A.phase==="setup";
+  let h='<section class="card auth"><h1>'+(setup?"Create your admin password":"Admin sign-in")+'</h1>';
+  if(setup)h+='<p class="hint">Open your Google Sheet, go to the Settings tab and copy the value next to adminSetupCode.</p>'
+    +'<div class="field"><label for="a-code">Setup code</label><input type="text" id="a-code" data-a="code" autocomplete="off" autocapitalize="characters" value="'+esc(a.code)+'"></div>'
+    +'<div class="field"><label for="a-pw">New password (8 characters or more)</label><input type="password" id="a-pw" data-a="pw" autocomplete="new-password"></div>'
+    +'<div class="field"><label for="a-pw2">Repeat the password</label><input type="password" id="a-pw2" data-a="pw2" autocomplete="new-password"></div>';
+  else h+='<div class="field"><label for="a-pw">Password</label><input type="password" id="a-pw" data-a="pw" autocomplete="current-password"></div>';
+  if(a.err)h+='<p class="err" role="alert">'+esc(ERR[a.err]||ERR.server)+'</p>';
+  h+='<div class="row"><button type="button" class="btn" data-auth="'+(setup?"setup":"login")+'"'+(A.busy?" disabled":"")+'>'+(A.busy?"Please wait…":setup?"Create password":"Sign in")+'</button></div>';
+  h+=setup?(A.hasPassword?'<button type="button" class="link" data-auth="tologin">Back to sign-in</button>':""):'<button type="button" class="link" data-auth="tosetup">Forgot the password? Use a setup code</button>';
+  return h+'</section>';
+}
+function vNew(){
+  const rows=B().filter(function(b){return b.status==="pending"||b.status==="proposed";}).sort(function(a,b){return a.createdAt<b.createdAt?-1:a.createdAt>b.createdAt?1:byWhen(a,b);});
+  if(!rows.length)return '<p class="empty">No new requests. Bookings sent from the website appear here.</p>';
+  const today=A.data.today,past=rows.filter(function(b){return b.date<today;}),rest=rows.filter(function(b){return b.date>=today;});
+  let h="";
+  if(past.length)h+='<h2 class="sec">Date has passed</h2><p class="hint">These were never confirmed. Cancel them, or offer the customer a new time.</p>'+past.map(card).join("")+(rest.length?'<h2 class="sec">Waiting for you</h2>':"");
+  return h+rest.map(card).join("");
+}
+function vUp(){
+  const today=A.data.today;
+  const late=B().filter(function(b){return b.status==="confirmed"&&b.date<today;}).sort(byWhen);
+  const ups=B().filter(function(b){return b.status==="confirmed"&&b.date>=today;}).sort(byWhen);
+  let h="";
+  const tmr=P.addDays(today,1),tb=B().filter(function(b){return b.date===tmr&&(b.status==="confirmed"||b.status==="pending"||b.status==="proposed");}).sort(byWhen);
+  if(tb.length){
+    h+='<section class="panel"><h2 class="sec">Tomorrow · reminders</h2><p class="hint">Customers who chose email get a reminder email automatically at about 6 PM. You also get an email then, with a WhatsApp button for everyone else.</p>';
+    tb.forEach(function(b){
+      let side;
+      if(b.status!=="confirmed")side='<span class="pill '+esc(b.status)+'">Not confirmed yet</span>';
+      else if(b.contact==="email"&&b.email)side=b.remindedAt?'<span class="st-ok">Email reminder sent</span>':'<span class="st-wait">Email reminder at about 6 PM</span>';
+      else side=waButton(b,"reminder","sm gold","Send WhatsApp reminder")||'<span class="st-wait">No phone number</span>';
+      const n=missed(b);
+      h+='<div class="rem"><div><b>'+esc(timeText(b))+' · '+esc(b.name)+'</b><span>'+esc(catName(b))+' · '+esc(meetOf(b))+'</span>'+(n?'<span class="flag">Missed '+n+' visit'+(n>1?"s":"")+' before</span>':"")+'</div>'+side+'</div>';
+    });
+    h+='</section>';
+  }
+  if(late.length)h+='<h2 class="sec">Past visits to close</h2><p class="hint">Open each one and mark it done or no-show.</p>'+late.map(card).join("");
+  if(!ups.length)return h+'<p class="empty">No confirmed visits coming up.</p>';
+  let cur="";
+  ups.forEach(function(b){if(b.date!==cur){cur=b.date;h+='<h2 class="sec">'+esc(P.fmtDate(cur,"en"))+(cur===today?" · today":"")+'</h2>';}h+=card(b);});
+  return h;
+}
+function vCal(){
+  const d=A.data,ym=A.month,a=ym.split("-").map(Number),lead=P.dow(ym+"-01"),dim=new Date(Date.UTC(a[0],a[1],0)).getUTCDate(),count={},blocked={};
+  B().forEach(function(b){if(b.status==="pending"||b.status==="proposed"||b.status==="confirmed"||b.status==="done")count[b.date]=(count[b.date]||0)+1;});
+  d.blocks.forEach(function(k){blocked[k.date]=true;});
+  let cells="";for(let i=0;i<lead;i++)cells+="<span></span>";
+  for(let n=1;n<=dim;n++){
+    const ds=ym+"-"+String(n).padStart(2,"0"),h=holidayOf(ds);
+    let cls="day";
+    if(P.CFG.off.indexOf(P.dow(ds))>=0)cls+=" off";else if(h&&!h.open)cls+=" hol";else if(blocked[ds])cls+=" blk";
+    if(ds===d.today)cls+=" today";if(ds===A.day)cls+=" sel";
+    cells+='<button type="button" class="'+cls+'" data-cday="'+ds+'" aria-pressed="'+(ds===A.day)+'" aria-label="'+esc(P.fmtDate(ds,"en")+(count[ds]?", "+count[ds]+" bookings":""))+'"><b>'+n+'</b><i'+(count[ds]?"":' class="z"')+'>'+(count[ds]||0)+'</i></button>';
+  }
+  let h='<section class="card"><div class="cal-h"><button type="button" data-cmonth="-1" aria-label="Previous month">‹</button><b>'+esc(P.monthTitle(ym,"en"))+'</b><button type="button" data-cmonth="1" aria-label="Next month">›</button></div>'
+    +'<div class="dow">'+P.DOW.en.map(function(x){return "<span>"+x+"</span>";}).join("")+'</div><div class="days">'+cells+'</div>'
+    +'<ul class="legend"><li class="l-o"><i></i>Day off</li><li class="l-h"><i></i>Holiday (closed online)</li><li class="l-b"><i></i>Blocked time</li></ul></section>';
+  const day=A.day,hol=holidayOf(day);
+  const list=B().filter(function(b){return b.date===day&&b.status!=="cancelled";}).sort(byWhen),blocks=d.blocks.filter(function(k){return k.date===day;});
+  h+='<h2 class="sec">'+esc(P.fmtDate(day,"en"))+(day===d.today?" · today":"")+'</h2>';
+  if(P.CFG.off.indexOf(P.dow(day))>=0)h+='<p class="hint">Your day off. Customers cannot book it online.</p>';
+  if(hol)h+='<div class="card"><p class="hint"><b>Public holiday: '+esc(hol.name)+'.</b> Online booking is '+(hol.open?"open":"closed; customers are asked to message you on WhatsApp")+'.</p><div class="row"><button type="button" class="btn sm ghost" data-hol="'+esc(day)+'" data-to="'+(hol.open?"0":"1")+'">'+(hol.open?"Close it again":"Open this day for online booking")+'</button></div></div>';
+  if(blocks.length)h+='<div class="card"><ul class="list">'+blocks.map(function(k){return '<li><span><b>Blocked '+(k.start==="00:00"&&k.end==="24:00"?"all day":esc(P.fmtTime(P.parseHm(k.start),"en")+" to "+P.fmtTime(Math.min(P.parseHm(k.end),1439),"en")))+'</b>'+(k.note?" · "+esc(k.note):"")+'</span><button type="button" class="btn sm ghost" data-unblock="'+esc(k.id)+'">Remove</button></li>';}).join("")+'</ul></div>';
+  h+=list.length?list.map(card).join(""):'<p class="empty">No bookings on this day.</p>';
+  return h;
+}
+function listAll(){
+  const q=A.q.trim().toLowerCase(),qd=q.replace(/\D/g,"");
+  let rows=B().filter(function(b){
+    if(A.filt!=="all"&&b.status!==A.filt)return false;
+    if(!q)return true;
+    return b.name.toLowerCase().indexOf(q)>=0||b.ref.toLowerCase().indexOf(q)>=0||(qd.length>=3&&b.phone.replace(/\D/g,"").indexOf(qd)>=0);
+  }).sort(function(a,b){return byWhen(b,a);});
+  const total=rows.length;rows=rows.slice(0,A.limit);
+  return (rows.length?rows.map(card).join(""):'<p class="empty">No bookings match.</p>')+(total>rows.length?'<div class="row"><button type="button" class="btn ghost" data-more="1">Show '+(total-rows.length)+' more</button></div>':"");
+}
+function vAll(){
+  const f=[["all","All"]].concat(P.STATUSES.map(function(s){return [s,STATUS[s]];}));
+  return '<div class="field"><label for="q">Search by name, phone or reference</label><input type="search" id="q" data-q="1" autocomplete="off" value="'+esc(A.q)+'"></div>'
+    +'<div class="chips">'+f.map(function(o){return '<button type="button" class="chip" data-filt="'+o[0]+'" aria-pressed="'+(A.filt===o[0])+'">'+esc(o[1])+'</button>';}).join("")+'</div><div id="list" style="display:flex;flex-direction:column;gap:10px">'+listAll()+'</div>';
+}
+function vSet(){
+  const s=A.data.settings,today=A.data.today,f=A.setForm||{notifyEmail:s.notifyEmail,adminUrl:s.adminUrl,bookingUrl:s.bookingUrl};A.setForm=f;
+  const chip=function(k,n,label,on){return '<button type="button" class="chip" data-setk="'+k+'" data-val="'+n+'" aria-pressed="'+on+'">'+label+'</button>';};
+  let h='<section class="card"><h2>Booking rules</h2>'
+    +'<div class="field"><span class="lab">How early must customers book?</span><div class="chips">'+[1,2,3].map(function(n){return chip("minNoticeDays",n,n+(n===1?" day":" days")+" ahead",s.minNoticeDays===n);}).join("")+'</div><p class="hint">Choose 1 day when your workload is light.</p></div>'
+    +'<div class="field"><span class="lab">How far ahead can they book?</span><div class="chips">'+[1,2,3].map(function(n){return chip("maxMonths",n,n+(n===1?" month":" months"),s.maxMonths===n);}).join("")+'</div></div></section>';
+  h+='<section class="card"><h2>Notifications and links</h2>'
+    +'<div class="field"><label for="s-mail">New requests are emailed to</label><input type="email" id="s-mail" data-s="notifyEmail" autocomplete="off" value="'+esc(f.notifyEmail)+'"><p class="hint">This address also gets the evening email at about 6 PM with tomorrow\'s visits and WhatsApp reminder buttons.</p></div>'
+    +'<div class="field"><label for="s-admin">Link to this admin page</label><input type="url" id="s-admin" data-s="adminUrl" placeholder="https://" value="'+esc(f.adminUrl)+'"><p class="hint">Added to the notification emails so one tap opens this page.</p></div>'
+    +'<div class="field"><label for="s-book">Link to the public booking page</label><input type="url" id="s-book" data-s="bookingUrl" placeholder="https://" value="'+esc(f.bookingUrl)+'"><p class="hint">Added to customer messages so they can check or cancel their booking.</p></div>'
+    +'<div class="row"><button type="button" class="btn sm" data-saveset="1">Save</button></div>'
+    +(A.data.mailLeft!=null?'<p class="hint">Emails you can still send today: '+esc(A.data.mailLeft)+'</p>':"")+'</section>';
+  const hol=A.data.holidays.filter(function(x){return x.date>=today;}).slice(0,16);
+  h+='<section class="card"><h2>Public holidays</h2><p class="hint">On a closed holiday the website asks customers to message you on WhatsApp. Open a day when the clinic confirms it is working.</p><ul class="list">'
+    +(hol.length?hol.map(function(x){const off=P.CFG.off.indexOf(P.dow(x.date))>=0;return '<li><span><b>'+esc(P.fmtDate(x.date,"en"))+'</b><br>'+esc(x.name)+' · '+(off?"your day off":x.open?"open online":"closed online")+'</span>'+(off?"":'<button type="button" class="btn sm ghost" data-hol="'+esc(x.date)+'" data-to="'+(x.open?"0":"1")+'">'+(x.open?"Close it":"Open it")+'</button>')+'</li>';}).join(""):"<li>No holidays listed.</li>")+'</ul></section>';
+  return h+'<div class="row"><button type="button" class="btn ghost" data-logout="1">Sign out</button></div>';
+}
+function vMain(){
+  const today=A.data.today;
+  const nNew=B().filter(function(b){return b.status==="pending"||b.status==="proposed";}).length;
+  const nToday=B().filter(function(b){return b.date===today&&(b.status==="pending"||b.status==="proposed"||b.status==="confirmed");}).length;
+  const nUp=B().filter(function(b){return b.status==="confirmed"&&b.date>=today;}).length;
+  const stat=function(tab,n,label,extra,hot){return '<button type="button" class="stat'+(hot?" hot":"")+'" data-tab="'+tab+'"'+(extra||"")+'><b>'+n+'</b><span>'+label+'</span></button>';};
+  let h='<div class="stats">'+stat("new",nNew,"New requests","",nNew>0)+stat("cal",nToday,"Today",' data-day="'+today+'"')+stat("up",nUp,"Upcoming")+'</div>';
+  h+='<nav class="tabs" aria-label="Sections">'+[["new","Requests"],["up","Upcoming"],["cal","Calendar"],["all","All bookings"],["set","Settings"]].map(function(t){return '<button type="button" data-tab="'+t[0]+'" aria-pressed="'+(A.tab===t[0])+'">'+t[1]+'</button>';}).join("")+'</nav>';
+  if(A.tab!=="set")h+='<div class="row"><button type="button" class="btn sm" data-add="1">Add booking</button><button type="button" class="btn sm ghost" data-block="1">Block time</button></div>';
+  return h+'<div id="view">'+({new:vNew,up:vUp,cal:vCal,all:vAll,set:vSet}[A.tab]||vNew)()+'</div>';
+}
+/* Warning shown inside the "move" and "add" forms. It is refreshed on its own, so picking a date never rebuilds the form. */
+function clashNote(m){
+  if(!m||(m.type!=="move"&&m.type!=="add"))return "";
+  if(!P.isDate(m.date)||isNaN(P.parseHm(m.start)))return "";
+  let h="";const note=dayNote(m.date);
+  if(note)h+='<p class="hint">'+esc(note)+'</p>';
+  if(P.clash(busyFor(m.type==="move"?m.ref:null),m.date,P.parseHm(m.start),Number(m.dur)||P.CFG.block))h+='<p class="warnbox">This overlaps another booking or a blocked time.</p><label class="check"><input type="checkbox" data-m="force"'+(m.force?" checked":"")+'><span>Save anyway</span></label>';
+  return h;
+}
+function modalHtml(){
+  const m=A.modal;if(!m)return "";
+  const b=m.ref?find(m.ref):null;let title="",body="",save="Save",danger=false;
+  if((m.type==="confirm"||m.type==="move"||m.type==="cancel"||m.type==="delete")&&!b){A.modal=null;return "";}
+  if(m.type==="confirm"){title="Confirm this booking?";save="Confirm booking";body=sumLine(b)+notifyRow(b,m);}
+  else if(m.type==="move"){
+    title=m.mode==="propose"?"Offer another time":"Change the time";save=m.mode==="propose"?"Offer this time":"Save new time";
+    body=sumLine(b)+(m.mode==="propose"?'<p class="hint">The booking moves to the new time and waits for the customer to agree. When they say yes, press Confirm.</p>':"")
+      +'<div class="field"><label for="m-date">Date</label><input type="date" id="m-date" data-m="date" data-re="1" value="'+esc(m.date)+'"></div>'
+      +'<div class="two">'+field("Time",timeSelect("start",m.start))+field("Length",select('data-m="dur" data-re="1" aria-label="Length"',DURS,m.dur))+'</div>'
+      +'<div id="clash" style="display:contents">'+clashNote(m)+'</div>'+notifyRow(b,m);
+  }
+  else if(m.type==="cancel"){title="Cancel this booking?";save="Cancel booking";danger=true;
+    body=sumLine(b)+'<div class="field"><label for="m-reason">Reason for the customer (optional)</label><input type="text" id="m-reason" data-m="reason" maxlength="200" value="'+esc(m.reason)+'"></div>'+notifyRow(b,m);}
+  else if(m.type==="delete"){title="Delete this booking?";save="Delete for good";danger=true;body=sumLine(b)+'<p class="hint">It is removed from the Google Sheet and cannot be brought back. To only free the time, use Cancel booking instead.</p>';}
+  else if(m.type==="add"){
+    title="Add a booking";save="Add booking";const c=P.cat(m.cat);
+    body=field("Treatment",select('data-m="cat" data-re="1" aria-label="Treatment"',[["","Choose"]].concat(P.CATS.map(function(x){return [x.id,x.name.en];})),m.cat))
+      +(c&&c.clinics.length>1?field("Location",select('data-m="loc" aria-label="Location"',[["","Choose"]].concat(c.clinics.map(function(k){return [k,P.CLINICS[k].en+" · "+P.stText(P.CLINICS[k].st[0],"en")];})),m.loc)):"")
+      +'<div class="field"><label for="m-date">Date</label><input type="date" id="m-date" data-m="date" data-re="1" value="'+esc(m.date)+'"></div>'
+      +'<div class="two">'+field("Time",timeSelect("start",m.start))+field("Length",select('data-m="dur" data-re="1" aria-label="Length"',DURS,m.dur))+'</div>'
+      +'<div id="clash" style="display:contents">'+clashNote(m)+'</div>'
+      +'<div class="field"><label for="m-name">Patient name</label><input type="text" id="m-name" data-m="name" maxlength="80" value="'+esc(m.name)+'"></div>'
+      +'<div class="field"><label for="m-phone">Phone (optional)</label><input type="tel" id="m-phone" data-m="phone" maxlength="30" value="'+esc(m.phone)+'"></div>'
+      +field("Language for messages",select('data-m="lang" aria-label="Language for messages"',[["en","English"],["ur","Urdu"],["ko","Korean"]],m.lang))
+      +'<div class="field"><label for="m-note">HS note (optional)</label><textarea id="m-note" data-m="adminNote" maxlength="600">'+esc(m.adminNote)+'</textarea></div>'
+      +'<p class="hint">It is saved as confirmed. Use a longer length for surgery days.</p>';
+  }
+  else if(m.type==="block"){
+    title="Block time";save="Block";
+    body='<p class="hint">Customers cannot book a blocked time. Your existing bookings stay as they are.</p>'
+      +'<div class="field"><label for="m-date">Date</label><input type="date" id="m-date" data-m="date" data-re="1" value="'+esc(m.date)+'"></div>'
+      +'<label class="check"><input type="checkbox" data-m="allDay" data-re="1"'+(m.allDay?" checked":"")+'><span>The whole day</span></label>'
+      +(m.allDay?"":'<div class="two">'+field("From",timeSelect("start",m.start))+field("To",timeSelect("end",m.end))+'</div>')
+      +'<div class="field"><label for="m-bnote">Note (optional)</label><input type="text" id="m-bnote" data-m="note" maxlength="120" value="'+esc(m.note)+'"></div>';
+  }
+  else if(m.type==="text"){title=m.title;save="";body='<textarea readonly rows="11" aria-label="'+esc(m.title)+'">'+esc(m.text)+'</textarea><p class="hint">Select the text and copy it.</p>';}
+  return '<div class="modal" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="sheet"><h2>'+esc(title)+'</h2>'+body+(m.err?'<p class="err" role="alert">'+esc(ERR[m.err]||ERR.server)+'</p>':"")
+    +'<div class="row">'+(save?'<button type="button" class="btn'+(danger?" danger":"")+'" data-save="1"'+(A.busy?" disabled":"")+'>'+(A.busy?"Please wait…":esc(save))+'</button>':"")+'<button type="button" class="btn ghost" data-close="1">'+(save?"Back":"Close")+'</button></div></div></div>';
+}
+function renderModal(){$("#modal").innerHTML=modalHtml();}
+function render(){
+  $("#demo").hidden=!DEMO;$("#refresh").hidden=A.phase!=="in";
+  let h="";
+  if(A.phase==="boot")h='<p class="empty">Loading…</p>';
+  else if(A.phase==="error")h='<section class="card auth"><h1>Cannot reach the server</h1><p class="hint">Check the internet connection, then try again.</p><div class="row"><button type="button" class="btn" data-retry="1">Try again</button></div></section>';
+  else if(A.phase==="login"||A.phase==="setup")h=vAuth();
+  else h=vMain();
+  $("#app").innerHTML=h;renderModal();
+}
+
+/* ---------- actions ---------- */
+function saveModal(){
+  const m=A.modal;if(!m||A.busy)return;
+  if(m.type==="confirm")return act({ref:m.ref,act:"confirm",notify:!!m.notify},"confirmed");
+  if(m.type==="move")return act({ref:m.ref,act:m.mode,date:m.date,start:m.start,dur:Number(m.dur),force:!!m.force,notify:!!m.notify},m.mode==="propose"?"proposed":"confirmed");
+  if(m.type==="cancel")return act({ref:m.ref,act:"cancel",reason:m.reason,notify:!!m.notify},"cancelled");
+  if(m.type==="delete")return act({ref:m.ref,act:"delete"},null);
+  if(m.type==="add"){
+    if(!m.cat){m.err="cat";return renderModal();}
+    const c=P.cat(m.cat);if(c.clinics.length>1&&!m.loc){m.err="loc";return renderModal();}
+    return send("admin.add",{force:!!m.force,booking:{cat:m.cat,loc:m.loc,date:m.date,start:m.start,dur:Number(m.dur),name:m.name,phone:m.phone,lang:m.lang,adminNote:m.adminNote,status:"confirmed"}},"Booking added.",function(r){A.open=r.ref;A.tab="cal";A.day=m.date;A.month=m.date.slice(0,7);});
+  }
+  if(m.type==="block")return send("admin.block",{date:m.date,allDay:!!m.allDay,start:m.start,end:m.end,note:m.note},"Time blocked.",function(){A.tab="cal";A.day=m.date;A.month=m.date.slice(0,7);});
+}
+function doAuth(kind){
+  const a=A.auth;if(A.busy)return;
+  if(kind==="tosetup"||kind==="tologin"){A.phase=kind==="tosetup"?"setup":"login";a.err="";a.pw="";a.pw2="";return render();}
+  if(kind==="setup"&&a.pw!==a.pw2){a.err="mismatch";return render();}
+  if(kind==="setup"&&a.pw.length<8){a.err="weak";return render();}
+  A.busy=true;a.err="";render();
+  call(kind==="setup"?{action:"admin.setPassword",code:a.code.trim().toUpperCase(),password:a.pw}:{action:"admin.login",password:a.pw}).then(function(r){
+    A.busy=false;
+    if(r&&r.ok){A.token=r.token;ses.set("pck-admin",r.token);A.hasPassword=true;a.pw="";a.pw2="";a.code="";A.phase="boot";render();return load(true);}
+    a.err=(r&&r.error)||"server";render();
+  }).catch(function(){A.busy=false;a.err="network";render();});
+}
+document.addEventListener("click",function(ev){
+  const el=ev.target.closest("button");if(!el)return;const d=el.dataset;
+  if(d.auth)return doAuth(d.auth);
+  if(d.retry){A.phase="boot";render();return boot();}
+  if(d.refresh)return load(false);
+  if(d.logout){A.token="";ses.del("pck-admin");A.data=null;A.phase="login";A.auth.err="";return render();}
+  if(d.tab){A.tab=d.tab;if(d.day){A.day=d.day;A.month=d.day.slice(0,7);}if(d.tab==="set")A.setForm=null;A.limit=60;return render();}
+  if(d.open){A.open=A.open===d.open?null:d.open;if(!A.after||A.after.ref!==A.open)A.after=null;return render();}
+  if(d.close){A.modal=null;return renderModal();}
+  if(d.save)return saveModal();
+  if(d.act){
+    const b=find(d.ref);if(!b)return;
+    if(d.act==="confirm")A.modal={type:"confirm",ref:b.ref,notify:true,err:""};
+    else if(d.act==="propose"||d.act==="reschedule")A.modal={type:"move",mode:d.act,ref:b.ref,date:b.date,start:b.start,dur:String(Number(b.dur)||P.CFG.block),force:false,notify:true,err:""};
+    else if(d.act==="cancel")A.modal={type:"cancel",ref:b.ref,reason:"",notify:true,err:""};
+    else if(d.act==="delete")A.modal={type:"delete",ref:b.ref,err:""};
+    else if(d.act==="note")return send("admin.act",{ref:b.ref,act:"note",note:A.notes[b.ref]!==undefined?A.notes[b.ref]:(b.adminNote||"")},"Note saved.",function(){delete A.notes[b.ref];});
+    else return act({ref:b.ref,act:d.act},null);
+    return renderModal();
+  }
+  if(d.copy){
+    const b=find(d.ref);if(!b)return;
+    if(d.copy==="ko")return copyText(P.clinicSummaryKo(b,A.data.today),"Korean summary for the clinic");
+    if(d.copy==="rem")return copyText(msgText("reminder",b),"Reminder for the customer");
+    return copyText(msgText(msgKind(b.status),b),"Message for the customer");
+  }
+  const base=A.tab==="cal"?A.day:A.data?A.data.today:"";
+  if(d.add){A.modal={type:"add",cat:"",loc:"",date:base,start:"10:00",dur:"120",name:"",phone:"",lang:"en",adminNote:"",force:false,err:""};return renderModal();}
+  if(d.block){A.modal={type:"block",date:base,allDay:true,start:"09:30",end:"18:00",note:"",err:""};return renderModal();}
+  if(d.unblock)return send("admin.unblock",{id:d.unblock},"Block removed.");
+  if(d.hol)return send("admin.holiday",{date:d.hol,open:d.to==="1"},d.to==="1"?"Holiday opened for online booking.":"Holiday closed for online booking.");
+  if(d.setk){const p={};p[d.setk]=Number(d.val);return send("admin.settings",p,"Saved.");}
+  if(d.saveset){const f=A.setForm||{};return send("admin.settings",{notifyEmail:f.notifyEmail,adminUrl:f.adminUrl,bookingUrl:f.bookingUrl},"Saved.",function(){A.setForm=null;});}
+  if(d.cmonth){A.month=P.addMonths(A.month+"-01",Number(d.cmonth)).slice(0,7);return render();}
+  if(d.cday){A.day=d.cday;return render();}
+  if(d.filt){A.filt=d.filt;A.limit=60;return render();}
+  if(d.more){A.limit+=60;return render();}
+});
+function onField(ev){
+  const el=ev.target,d=el.dataset||{};
+  if(d.a){A.auth[d.a]=el.value;return;}
+  if(d.m&&A.modal){A.modal[d.m]=el.type==="checkbox"?el.checked:el.value;if(d.m==="cat")A.modal.loc="";if(d.m!=="force")A.modal.err="";if(d.re){if(el.type==="date"){const c=$("#clash");if(c)c.innerHTML=clashNote(A.modal);}else if(ev.type==="change")renderModal();}return;}
+  if(d.note){A.notes[d.note]=el.value;return;}
+  if(d.q){if(ev.type!=="input")return;A.q=el.value;A.limit=60;const l=$("#list");if(l)l.innerHTML=listAll();return;}
+  if(d.s&&A.setForm){A.setForm[d.s]=el.value;}
+}
+document.addEventListener("input",onField);document.addEventListener("change",onField);
+document.addEventListener("keydown",function(ev){
+  if(ev.key==="Enter"&&ev.target.dataset&&ev.target.dataset.a&&(A.phase==="login"||A.phase==="setup")){ev.preventDefault();doAuth(A.phase);}
+  if(ev.key==="Escape"&&A.modal&&!A.busy){A.modal=null;renderModal();}
+});
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&A.phase==="in"&&!A.modal&&!A.busy&&Date.now()-A.loadedAt>60000)load(true);});
+
+function boot(){
+  if(DEMO)return call({action:"admin.login",password:"demo"}).then(function(r){A.token=r.token;return load(true);});
+  A.token=ses.get("pck-admin");
+  if(A.token)return load(true);
+  return call({action:"admin.state"}).then(function(r){
+    if(!r||!r.ok){A.phase="error";return render();}
+    A.hasPassword=!!r.hasPassword;A.phase=A.hasPassword?"login":"setup";render();
+  }).catch(function(){A.phase="error";render();});
+}
+render();
+boot();
+})();
+</script>
+</body>
+</html>

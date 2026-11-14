@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pakistan Clinic Korea Booking</title>
+<meta name="description" content="Book your clinic visit in Seoul with Pakistan Clinic Korea by HS.">
+<meta name="theme-color" content="#14503A">
+<meta property="og:title" content="Pakistan Clinic Korea by HS · Booking">
+<meta property="og:description" content="Book your clinic visit in Seoul. English, Urdu and Korean.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='3' y='3' width='58' height='58' rx='14' fill='%23235B45' stroke='%23C9A24A' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' text-anchor='middle' fill='%23C9A24A'%3EHS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  /* Layout: one phone-width column on the poster's green field. Cream cards hold each step;
+     gold marks the current step and the meeting point; red is kept for booked times and warnings. */
+  --green:#14503A; --green-2:#235B45; --green-3:#0F3F2E;
+  --gold:#C9A24A; --gold-ink:#7A5B17;
+  --cream:#F7F2E4; --paper:#FFFCF3; --ink:#17382B; --muted:#5C6B61; --line:#DCD2B6; --taken:#ECE5D1;
+  --red:#B03030; --red-ink:#7E1F1F; --red-tint:#F5DFD9;
+  --font-latin:'Poppins','Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',Arial,sans-serif;
+  --font-ur:'Noto Naskh Arabic','Geeza Pro','Segoe UI',Tahoma,sans-serif;
+  --font-ur-display:'Noto Nastaliq Urdu','Noto Naskh Arabic','Geeza Pro',serif;
+  --font-mono:'DM Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--green);color:var(--cream);font-family:var(--font-latin);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+html[lang=ur] body{font-family:var(--font-ur);font-size:17.5px;line-height:1.9}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ltr{direction:ltr;unicode-bidi:isolate;font-family:var(--font-latin)}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.preview{background:var(--cream);color:var(--ink);font-size:12.5px;line-height:1.5;text-align:center;padding:6px 16px}
+
+.top{border-bottom:1px solid var(--gold)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding-block:14px}
+.badge{flex:none;width:46px;height:46px;border:2px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font:700 17px/1 var(--font-latin);background:var(--green-2)}
+.brand{flex:1 1 190px;min-width:0;display:flex;flex-direction:column;gap:3px;direction:ltr;text-align:left}
+.brand b{font:600 16.5px/1.2 var(--font-latin);letter-spacing:.04em;color:#fff}
+.brand span{font:500 10px/1.3 var(--font-mono);letter-spacing:.16em;color:var(--gold)}
+.lang{display:flex;border:1.5px solid var(--gold);border-radius:999px;padding:3px;gap:2px;direction:ltr}
+.lang button{appearance:none;border:0;background:transparent;color:var(--cream);border-radius:999px;padding:4px 12px;min-height:34px;cursor:pointer;font:500 13.5px/1.2 var(--font-latin)}
+.lang button[lang=ur]{font-family:var(--font-ur);font-size:15px}
+.lang button[aria-pressed=true]{background:var(--gold);color:var(--green-3);font-weight:700}
+
+.hero{padding-block:22px 4px;display:flex;flex-direction:column;gap:8px}
+.hero h1{margin:0;font:700 26px/1.2 var(--font-latin);color:var(--cream);text-wrap:balance}
+html[lang=ur] .hero h1{font:700 25px/2.3 var(--font-ur-display)}
+.hero p{margin:0;color:#E2E8DB;font-size:15px;max-width:48ch}
+html[lang=ur] .hero p{font-size:16.5px}
+.hero a{color:var(--gold);font-size:14px;font-weight:500}
+html[lang=ur] .hero a{font-size:15.5px}
+.steps{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.steps li{display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.35;color:#B9CBBE}
+html[lang=ur] .steps li{font-size:13.5px;line-height:1.7}
+.steps li::before{content:"";height:4px;border-radius:2px;background:var(--green-2)}
+.steps li.done{color:var(--cream)}
+.steps li.done::before{background:var(--cream)}
+.steps li.now{color:var(--gold);font-weight:600}
+.steps li.now::before{background:var(--gold)}
+
+.card{background:var(--cream);color:var(--ink);border-radius:18px;padding:18px 16px 20px;margin-block:16px;display:flex;flex-direction:column;gap:16px}
+.card h2{margin:0;font:700 20px/1.25 var(--font-latin);text-wrap:balance}
+html[lang=ur] .card h2{font:700 19.5px/2.3 var(--font-ur-display)}
+.label{font:500 11.5px/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}
+html[lang=ur] .label{font:700 15px/1.8 var(--font-ur);letter-spacing:0}
+html[lang=ko] .label{letter-spacing:.06em;font-family:var(--font-latin);font-size:12.5px;font-weight:600}
+.hint{margin:0;color:var(--muted);font-size:14px}
+html[lang=ur] .hint{font-size:15.5px}
+.sum{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 8px}
+.sum b{color:var(--ink);font-weight:600}
+html[lang=ur] .sum{font-size:15px}
+
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{appearance:none;text-align:start;border:1.5px solid var(--line);background:var(--paper);border-radius:14px;padding:12px;min-height:76px;cursor:pointer;display:flex;flex-direction:column;gap:3px;color:var(--ink)}
+.opt b{font-weight:600;font-size:15.5px;line-height:1.3}
+.opt span{color:var(--muted);font-size:12.5px;line-height:1.4}
+html[lang=ur] .opt b{font-size:17px;line-height:1.7;font-weight:700}
+html[lang=ur] .opt span{font-size:14px;line-height:1.7}
+.opt[aria-pressed=true]{background:var(--green);border-color:var(--gold);color:var(--cream)}
+.opt[aria-pressed=true] span{color:#D5DFD2}
+@media (max-width:340px){.opts{grid-template-columns:1fr}}
+
+.meet{border-radius:14px;overflow:hidden;background:var(--green-2);color:var(--cream)}
+.meet-h{background:var(--gold);color:var(--green-3);padding:7px 14px;font:500 11.5px/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase}
+html[lang=ur] .meet-h{font:700 15px/1.8 var(--font-ur);letter-spacing:0}
+html[lang=ko] .meet-h{font:600 12.5px/1.4 var(--font-latin);letter-spacing:.06em}
+.meet-b{padding:14px;display:flex;flex-direction:column;gap:10px}
+.st{display:flex;flex-direction:column;gap:1px}
+.st b{font:700 21px/1.25 var(--font-latin)}
+html[lang=ur] .st b{font:700 21px/1.8 var(--font-ur)}
+.st small{color:var(--gold);font-size:13.5px}
+.meet .or{font-size:12.5px;color:#C9D6CB}
+.meet .cl{border-top:1px solid rgba(201,162,74,.45);padding-top:10px;font-size:13.5px;color:#DDE6DA}
+html[lang=ur] .meet .cl{font-size:15px}
+.meet .pick{font-size:13.5px;color:#DDE6DA}
+html[lang=ur] .meet .pick{font-size:15px}
+.loc{appearance:none;text-align:start;width:100%;background:transparent;border:1.5px solid rgba(201,162,74,.5);border-radius:12px;padding:10px 12px;color:var(--cream);cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start}
+.loc i{width:18px;height:18px;border-radius:50%;border:2px solid var(--gold);margin-top:6px;display:block}
+.loc[aria-pressed=true]{background:var(--green);border-color:var(--gold)}
+.loc[aria-pressed=true] i{background:var(--gold);box-shadow:inset 0 0 0 3px var(--green)}
+.loc .cl2{grid-column:2;font-size:13px;color:#DDE6DA}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;min-height:40px;cursor:pointer;font-size:14.5px;line-height:1.3}
+html[lang=ur] .chip{font-size:15.5px;line-height:1.7}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--cream)}
+
+.nav{display:flex;gap:10px}
+.btn{appearance:none;border:0;border-radius:12px;min-height:50px;padding:10px 18px;font-weight:600;font-size:16px;line-height:1.3;cursor:pointer;background:var(--green);color:var(--cream);flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+html[lang=ur] .btn{font-size:17.5px;font-weight:700;line-height:1.7}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);flex:0 0 auto}
+.btn.gold{background:var(--gold);color:var(--green-3)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.ghost.danger{background:transparent;color:var(--red-ink);border-color:#E5BDB4}
+.okbox{margin:0;background:#E2ECE4;color:var(--green);border-radius:12px;padding:12px 14px;font-weight:600}
+.btn:disabled{opacity:.6;cursor:progress}
+.err{margin:0;background:var(--red-tint);color:var(--red-ink);border-radius:10px;padding:10px 12px;font-size:14px;font-weight:500}
+html[lang=ur] .err{font-size:15.5px}
+
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cal-h b{font-size:17px;font-weight:600}
+.cal-h button{appearance:none;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;font:600 20px/1 var(--font-latin);color:var(--ink)}
+.cal-h button:disabled{opacity:.35;cursor:default}
+[dir=rtl] .cal-h button{transform:scaleX(-1)}
+.dow,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dow span{text-align:center;font-size:11.5px;color:var(--muted)}
+html[lang=ur] .dow span{font-size:11px;line-height:1.6}
+.day{appearance:none;border:1.5px solid transparent;border-radius:10px;background:var(--paper);min-height:52px;padding:4px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--ink)}
+.day b{font:600 15.5px/1 var(--font-latin);font-variant-numeric:tabular-nums}
+.day small{font-size:9.5px;line-height:1.2}
+html[lang=ur] .day small{font-size:11px;line-height:1.5}
+.day:disabled{cursor:default}
+.day.na{background:transparent;color:#A9AE9E}
+.day.na b{font-weight:400}
+.day.off{background:transparent;border:1.5px dashed var(--line);color:#8C927F}
+.day.off b{font-weight:400}
+.day.hol{background:var(--red-tint);color:var(--red-ink)}
+.day.full{background:var(--taken);color:#8B8872}
+.day.open{border-color:var(--line)}
+.day.sel{background:var(--green);border-color:var(--gold);color:var(--cream)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);margin:0;padding:0;list-style:none}
+html[lang=ur] .legend{font-size:14px}
+.legend i{display:inline-block;width:13px;height:13px;border-radius:4px;margin-inline-end:6px;vertical-align:-2px;border:1.5px solid var(--line);background:var(--paper)}
+.legend .l-b i{background:var(--taken);border-color:var(--taken)}
+.legend .l-o i{background:transparent;border-style:dashed}
+.legend .l-h i{background:var(--red-tint);border-color:var(--red-tint)}
+
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.slot{appearance:none;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;min-height:52px;padding:6px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:var(--ink)}
+.slot b{font:600 15px/1.2 var(--font-latin);font-variant-numeric:tabular-nums;direction:ltr}
+.slot small{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+html[lang=ur] .slot small{font-size:12.5px;letter-spacing:0;line-height:1.5}
+.slot.taken{background:var(--taken);border-color:transparent;cursor:default;color:#8B8872}
+.slot.taken b{text-decoration:line-through;font-weight:500}
+.slot.taken small{color:var(--red)}
+.slot.sel{background:var(--green);border-color:var(--gold);color:var(--cream)}
+.notice{background:var(--red-tint);color:var(--red-ink);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.notice b{font-size:16px}
+.notice p{margin:0;font-size:14.5px}
+html[lang=ur] .notice p{font-size:16px}
+.wait{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14.5px;padding-block:8px}
+.wait i{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--line);border-top-color:var(--green);flex:none}
+.aside{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:14px;font-size:14px;color:var(--muted)}
+html[lang=ur] .aside{font-size:15.5px}
+.aside a{color:var(--green);font-weight:600}
+.tiny{margin:0;font-size:12.5px;color:var(--muted)}
+html[lang=ur] .tiny{font-size:14px}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field>label,.field>.lab{font-weight:600;font-size:15px}
+html[lang=ur] .field>label,html[lang=ur] .field>.lab{font-size:16.5px;font-weight:700}
+.opt-tag{font-weight:400;color:var(--muted);font-size:13px}
+html[lang=ur] .opt-tag{font-size:14.5px}
+input[type=text],input[type=tel],input[type=email],select,textarea{width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 12px;color:var(--ink)}
+textarea{min-height:92px;resize:vertical;display:block}
+.dob{display:grid;grid-template-columns:1fr 1.5fr 1.2fr;gap:8px}
+
+.block{display:flex;flex-direction:column;gap:10px}
+.block-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.link{appearance:none;border:0;background:none;padding:6px 0;color:var(--green);font-weight:600;font-size:14px;text-decoration:underline;cursor:pointer}
+html[lang=ur] .link{font-size:15.5px}
+.review{margin:0;display:grid;grid-template-columns:minmax(96px,auto) 1fr;gap:8px 14px;font-size:15px}
+html[lang=ur] .review{font-size:16px}
+.review dt{color:var(--muted)}
+.review dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+html[lang=ur] .review dd{font-weight:600}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+html[lang=ur] .consent{font-size:16px}
+.consent input{width:22px;height:22px;flex:none;margin-top:3px;accent-color:var(--green)}
+
+.ref{background:var(--green-2);color:var(--cream);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:2px;align-items:center;text-align:center}
+.ref span{font-size:13px;color:#DDE6DA}
+html[lang=ur] .ref span{font-size:15px}
+.ref b{font:500 27px/1.3 var(--font-mono);letter-spacing:.06em;color:var(--gold);direction:ltr}
+.warn{margin:0;background:var(--red);color:#fff;border-radius:12px;padding:12px 14px;font-weight:600;font-size:15px}
+html[lang=ur] .warn{font-size:16.5px;font-weight:700}
+.pill{align-self:flex-start;border-radius:999px;padding:5px 14px;font-weight:600;font-size:14px;background:var(--taken);color:var(--ink)}
+html[lang=ur] .pill{font-size:15.5px;font-weight:700}
+.pill.confirmed{background:var(--green);color:var(--cream)}
+.pill.proposed{background:var(--gold);color:var(--green-3)}
+.pill.cancelled,.pill.noshow{background:var(--red-tint);color:var(--red-ink)}
+
+.foot{background:var(--gold);color:var(--green-3);margin-top:28px}
+.foot .wrap{padding-block:18px 24px;display:flex;flex-direction:column;gap:12px}
+.foot .row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 16px}
+.foot .q{font-weight:600;font-size:15px}
+html[lang=ur] .foot .q{font-size:16.5px;font-weight:700}
+.foot a.num{font:700 24px/1.15 var(--font-latin);color:var(--green-3);text-decoration:none;direction:ltr}
+.foot .soc{margin:0;font-size:12.5px;line-height:1.6;direction:ltr;text-align:left;font-family:var(--font-latin);border-top:1px solid rgba(15,63,46,.3);padding-top:10px}
+@media (prefers-reduced-motion:no-preference){
+  .opt,.chip,.slot,.day,.btn{transition:background-color .12s,border-color .12s,color .12s}
+  .wait i{animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+}
+</style>
+</head>
+<body>
+<div class="preview" id="pv" hidden></div>
+<header class="top"><div class="wrap">
+  <div class="badge" aria-hidden="true">HS</div>
+  <div class="brand"><b>PAKISTAN CLINIC KOREA</b><span>BY HS · TARJUMA · HOSPITAL SAATH</span></div>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="en" lang="en">EN</button>
+    <button type="button" data-lang="ur" lang="ur">اردو</button>
+    <button type="button" data-lang="ko" lang="ko">한국어</button>
+  </div>
+</div></header>
+<main class="wrap">
+  <section class="hero"><h1 id="h1"></h1><p id="lede"></p><a id="swap" href="#status"></a><ol class="steps" id="steps"></ol></section>
+  <div id="app"></div>
+</main>
+<footer class="foot"><div class="wrap">
+  <div class="row"><span class="q" id="footQ"></span><a class="num" id="footNum" target="_blank" rel="noopener">+82 10-9522-6111</a></div>
+  <p class="soc">TikTok · Pakistan Clinic Korea by HS<br>Facebook · Pakistan Clinic Korea by HS<br>Instagram · Korea Medical Services by HS</p>
+</div></footer>
+
+<!--CONFIG-->
+<script src="core.js"></script>
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+const P=PCK, CFG=P.CFG;
+const API=(window.PCK_CONFIG&&window.PCK_CONFIG.api)||"";
+const DEMO=!API;
+const engine=DEMO?P.createEngine(P.demoEnv()):null;
+
+const STR={
+en:{preview:"Preview only. Bookings are not saved or sent yet.",
+ h1:"Book your clinic visit in Seoul",
+ lede:"Pick your treatment, day and time. HS confirms with the clinic, meets you at the station and translates for you.",
+ steps:["Treatment","Day & time","Your details","Send"],
+ s1:"What do you need help with?",meet:"Meeting point",or:"or",clinic:"Clinic",pickLoc:"Choose a location",
+ needs:"What exactly do you need?",optional:"optional",next:"Continue",back:"Back",
+ s2:"Choose a day",s2hint:"Book at least {n} days ahead. Closed on Wednesdays and Sundays.",
+ lgOpen:"Available",lgBooked:"Booked",lgOff:"Closed",lgHol:"Public holiday",off:"Closed",hol:"Holiday",full:"Full",
+ pickTime:"Choose a time",booked:"Booked",
+ timeNote:"HS keeps 2 hours for each patient, so nearby times also show as booked.",
+ satUro:"On Saturdays this clinic closes at 1:30 PM.",
+ holTitle:"Public holiday in Korea",holBody:"Some clinics open on public holidays and some close. Message HS on WhatsApp to check this date.",holBtn:"Ask HS on WhatsApp",
+ urgent:"Need an earlier day?",urgentBtn:"Ask on WhatsApp",
+ loading:"Loading available times…",loadErr:"Could not load the available times.",retry:"Try again",
+ s3:"Your details",fName:"Full name",fNameHint:"In English letters, as on your passport or ARC",
+ fDob:"Date of birth",day:"Day",month:"Month",year:"Year",fGender:"Gender",male:"Male",female:"Female",
+ fNat:"Nationality",choose:"Choose",natOther:"Write your nationality",
+ fIns:"Do you have Korean health insurance?",yes:"Yes",no:"No",unsure:"Not sure",
+ fPhone:"Phone number",fPhoneHint:"Add the country code if the number is not Korean, for example +92",
+ fContact:"Where should HS send your confirmation?",whatsapp:"WhatsApp",email:"Email",waHint:"HS will message this phone number on WhatsApp.",
+ fEmail:"Email address",fSrc:"How did you find us?",friend:"Friend or family",other:"Other",
+ fPeople:"How many people need treatment?",p1:"Just me",p2:"2 people",p3:"3 or more",
+ fNote:"Anything HS should know?",fNotePh:"Symptoms, questions, or a time that suits you better",
+ s4:"Check and send",visit:"Your visit",you:"Your details",
+ rTreat:"Treatment",rWhen:"Day and time",rWhere:"Meeting point",rName:"Name",rDob:"Date of birth",rGender:"Gender",rNat:"Nationality",rIns:"Health insurance",rPhone:"Phone",rContact:"Confirmation",rSrc:"Found us on",rPeople:"People",rNote:"Note",
+ consent:"I agree that these details are used only to arrange my visit and are shared with the clinic for this booking.",
+ submit:"Send booking request",sending:"Sending…",edit:"Change",sendWa:"Send by WhatsApp instead",
+ doneT:"Request received",doneB:"This is not a confirmed booking yet. HS checks with the clinic and replies within 1 to 2 days {ch}.",
+ chWa:"on WhatsApp",chEmail:"by email",ref:"Reference number",refKeep:"Keep this number. You can use it to check or cancel your booking.",doneWarn:"Please wait for the confirmation before you travel.",
+ doneWa:"Message HS on WhatsApp",again:"Book another visit",
+ footQ:"Only have a question? No booking needed. WhatsApp HS:",
+ sample:"Sample bookings are shown so you can see how booked times look.",
+ stLink:"Already sent a request? Check its status",stBack:"Back to booking",stTitle:"Check your booking",stRef:"Reference number",stPhone:"Phone number you used",stBtn:"Check status",checking:"Checking…",cancelBtn:"Cancel this booking",cancelQ:"Cancel booking {ref}? This cannot be undone.",cancelYes:"Yes, cancel it",cancelNo:"Keep my booking",cancelling:"Cancelling…",cancelDone:"Your booking is cancelled. HS has been told, and the time is free for someone else.",
+ status:{pending:"Waiting for confirmation",proposed:"New time suggested",confirmed:"Confirmed",cancelled:"Cancelled",done:"Completed",noshow:"Missed"},
+ statusText:{pending:"HS is checking with the clinic. You will hear back within 1 to 2 days.",proposed:"HS suggested the time below. Reply to HS to accept it, or ask for another day.",confirmed:"See you at the meeting point. Please bring your passport or ARC. If you cannot come, cancel below so someone else can use the time.",cancelled:"This booking was cancelled. You can book another day.",done:"",noshow:""},
+ mHol:"Hello HS, is {cat} possible on {date}? It is a public holiday.",
+ mUrg:"Hello HS, I need an earlier day for {cat}. Is it possible?",
+ mDone:"Hello HS, I sent booking request {ref} for {cat} on {date} at {time}.",
+ mGen:"Hello HS, I have a question.",
+ err:{toolate:"This visit time has already passed, so it cannot be cancelled here. Please message HS on WhatsApp.",closed:"This booking is already cancelled or finished.",cat:"Choose a treatment to continue.",loc:"Choose a location to continue.",time:"Choose a day and a time to continue.",name:"Enter your full name.",dob:"Choose your full date of birth.",gender:"Choose your gender.",nat:"Choose your nationality.",ins:"Tell us about your health insurance.",phone:"Enter a phone number with 8 to 15 digits.",contact:"Choose WhatsApp or email.",email:"Enter a valid email address.",src:"Tell us how you found us.",consent:"Tick the box to agree before sending.",
+  taken:"Sorry, that time was just taken. Please choose another time.",limit:"This phone number already has 3 open bookings. Please message HS on WhatsApp.",busy:"We cannot take more online requests today. Please message HS on WhatsApp.",server:"Something went wrong on our side. Please try again, or message HS on WhatsApp.",invalid:"Something in the form could not be read. Please check it and try again.",network:"Could not send. Check your internet and try again, or send the same details to HS on WhatsApp.",notfound:"No booking matches this reference number and phone number."}},
+ur:{preview:"صرف پری ویو۔ ابھی بکنگ محفوظ یا ارسال نہیں ہوتی۔",
+ h1:"سیول میں کلینک کی بکنگ کریں",
+ lede:"علاج، دن اور وقت چُنیں۔ HS کلینک سے کنفرم کرتا ہے، اسٹیشن پر آپ سے ملتا ہے اور ترجمہ کرتا ہے۔",
+ steps:["علاج","دن اور وقت","آپ کی معلومات","ارسال"],
+ s1:"آپ کو کس چیز میں مدد چاہیے؟",meet:"ملنے کی جگہ",or:"یا",clinic:"کلینک",pickLoc:"جگہ چُنیں",
+ needs:"آپ کو خاص طور پر کیا چاہیے؟",optional:"اختیاری",next:"آگے بڑھیں",back:"واپس",
+ s2:"دن چُنیں",s2hint:"کم از کم {n} دن پہلے بکنگ کریں۔ بدھ اور اتوار کو چھٹی ہے۔",
+ lgOpen:"دستیاب",lgBooked:"بُک ہو چکا",lgOff:"چھٹی",lgHol:"سرکاری چھٹی",off:"چھٹی",hol:"تعطیل",full:"فُل",
+ pickTime:"وقت چُنیں",booked:"بُک",
+ timeNote:"HS ہر مریض کے لیے 2 گھنٹے رکھتا ہے، اس لیے آس پاس کے وقت بھی بُک نظر آتے ہیں۔",
+ satUro:"ہفتے کو یہ کلینک دوپہر 1:30 بجے بند ہو جاتا ہے۔",
+ holTitle:"کوریا میں سرکاری چھٹی",holBody:"سرکاری چھٹی پر کچھ کلینک کھلے اور کچھ بند ہوتے ہیں۔ اس تاریخ کے لیے HS سے WhatsApp پر پوچھ لیں۔",holBtn:"HS سے WhatsApp پر پوچھیں",
+ urgent:"اس سے پہلے کا دن چاہیے؟",urgentBtn:"WhatsApp پر پوچھیں",
+ loading:"دستیاب وقت لوڈ ہو رہے ہیں…",loadErr:"دستیاب وقت لوڈ نہیں ہو سکے۔",retry:"دوبارہ کوشش کریں",
+ s3:"آپ کی معلومات",fName:"پورا نام",fNameHint:"انگریزی حروف میں، جیسا پاسپورٹ یا ARC پر ہے",
+ fDob:"تاریخِ پیدائش",day:"دن",month:"مہینہ",year:"سال",fGender:"جنس",male:"مرد",female:"عورت",
+ fNat:"قومیت",choose:"چُنیں",natOther:"اپنی قومیت لکھیں",
+ fIns:"کیا آپ کے پاس کورین ہیلتھ انشورنس ہے؟",yes:"ہاں",no:"نہیں",unsure:"معلوم نہیں",
+ fPhone:"فون نمبر",fPhoneHint:"نمبر کوریا کا نہیں تو ملک کا کوڈ بھی لکھیں، مثلاً ⁦+92⁩",
+ fContact:"HS کنفرمیشن کہاں بھیجے؟",whatsapp:"WhatsApp",email:"ای میل",waHint:"HS اسی فون نمبر پر WhatsApp میسج کرے گا۔",
+ fEmail:"ای میل ایڈریس",fSrc:"آپ کو ہمارا پتہ کہاں سے چلا؟",friend:"دوست یا رشتہ دار",other:"دیگر",
+ fPeople:"کتنے لوگوں کو علاج چاہیے؟",p1:"صرف میں",p2:"2 لوگ",p3:"3 یا زیادہ",
+ fNote:"HS کو کچھ اور بتانا ہے؟",fNotePh:"تکلیف، سوال، یا کوئی اور وقت جو آپ کے لیے بہتر ہو",
+ s4:"چیک کریں اور بھیجیں",visit:"آپ کی وزٹ",you:"آپ کی معلومات",
+ rTreat:"علاج",rWhen:"دن اور وقت",rWhere:"ملنے کی جگہ",rName:"نام",rDob:"تاریخِ پیدائش",rGender:"جنس",rNat:"قومیت",rIns:"ہیلتھ انشورنس",rPhone:"فون",rContact:"کنفرمیشن",rSrc:"ذریعہ",rPeople:"لوگ",rNote:"نوٹ",
+ consent:"میں متفق ہوں کہ یہ معلومات صرف میری وزٹ کے انتظام کے لیے استعمال ہوں گی اور اسی بکنگ کے لیے کلینک کو دی جائیں گی۔",
+ submit:"بکنگ کی درخواست بھیجیں",sending:"بھیجا جا رہا ہے…",edit:"تبدیل کریں",sendWa:"WhatsApp پر بھیج دیں",
+ doneT:"درخواست موصول ہو گئی",doneB:"یہ ابھی کنفرم بکنگ نہیں ہے۔ HS کلینک سے چیک کر کے 1 سے 2 دن میں {ch} جواب دے گا۔",
+ chWa:"WhatsApp پر",chEmail:"ای میل پر",ref:"ریفرنس نمبر",refKeep:"یہ نمبر سنبھال کر رکھیں۔ اسی سے آپ اپنی بکنگ چیک یا کینسل کر سکتے ہیں۔",doneWarn:"کنفرمیشن ملنے سے پہلے سفر نہ کریں۔",
+ doneWa:"HS کو WhatsApp کریں",again:"ایک اور بکنگ کریں",
+ footQ:"صرف سوال پوچھنا ہے؟ بکنگ ضروری نہیں۔ HS کو WhatsApp کریں:",
+ sample:"نمونے کی بکنگز دکھائی گئی ہیں تاکہ بُک وقت کی شکل نظر آئے۔",
+ stLink:"پہلے درخواست بھیج چکے ہیں؟ اس کا اسٹیٹس دیکھیں",stBack:"بکنگ پر واپس",stTitle:"اپنی بکنگ چیک کریں",stRef:"ریفرنس نمبر",stPhone:"وہی فون نمبر جو آپ نے لکھا تھا",stBtn:"اسٹیٹس دیکھیں",checking:"چیک ہو رہا ہے…",cancelBtn:"یہ بکنگ کینسل کریں",cancelQ:"بکنگ {ref} کینسل کریں؟ یہ واپس نہیں ہو سکے گی۔",cancelYes:"ہاں، کینسل کریں",cancelNo:"بکنگ رہنے دیں",cancelling:"کینسل ہو رہی ہے…",cancelDone:"آپ کی بکنگ کینسل ہو گئی ہے۔ HS کو اطلاع مل گئی ہے اور یہ وقت اب کسی اور کے لیے خالی ہے۔",
+ status:{pending:"کنفرمیشن کا انتظار ہے",proposed:"نیا وقت تجویز ہوا ہے",confirmed:"کنفرم",cancelled:"کینسل",done:"مکمل",noshow:"وزٹ نہیں ہوئی"},
+ statusText:{pending:"HS کلینک سے چیک کر رہا ہے۔ 1 سے 2 دن میں جواب مل جائے گا۔",proposed:"HS نے نیچے والا وقت تجویز کیا ہے۔ قبول کرنے یا کوئی اور دن مانگنے کے لیے HS کو جواب دیں۔",confirmed:"ملنے کی جگہ پر ملاقات ہو گی۔ اپنا پاسپورٹ یا ARC ساتھ لائیں۔ اگر آپ نہ آ سکیں تو نیچے سے کینسل کر دیں تاکہ یہ وقت کسی اور کے کام آ سکے۔",cancelled:"یہ بکنگ کینسل ہو گئی ہے۔ آپ کوئی اور دن بُک کر سکتے ہیں۔",done:"",noshow:""},
+ mHol:"السلام علیکم HS، کیا {date} (سرکاری چھٹی) کو {cat} کی بکنگ ہو سکتی ہے؟",
+ mUrg:"السلام علیکم HS، مجھے {cat} کے لیے جلدی کا دن چاہیے۔ کیا ممکن ہے؟",
+ mDone:"السلام علیکم HS، میں نے {cat} کے لیے {date}، {time} کی بکنگ کی درخواست بھیجی ہے۔ ریفرنس: {ref}",
+ mGen:"السلام علیکم HS، مجھے ایک سوال پوچھنا ہے۔",
+ err:{toolate:"اس وزٹ کا وقت گزر چکا ہے، اس لیے یہاں سے کینسل نہیں ہو سکتی۔ HS کو WhatsApp کریں۔",closed:"یہ بکنگ پہلے ہی کینسل یا مکمل ہو چکی ہے۔",cat:"آگے بڑھنے کے لیے علاج چُنیں۔",loc:"آگے بڑھنے کے لیے جگہ چُنیں۔",time:"آگے بڑھنے کے لیے دن اور وقت چُنیں۔",name:"اپنا پورا نام لکھیں۔",dob:"پوری تاریخِ پیدائش چُنیں۔",gender:"جنس چُنیں۔",nat:"قومیت چُنیں۔",ins:"ہیلتھ انشورنس کے بارے میں بتائیں۔",phone:"8 سے 15 ہندسوں کا فون نمبر لکھیں۔",contact:"WhatsApp یا ای میل میں سے ایک چُنیں۔",email:"درست ای میل ایڈریس لکھیں۔",src:"بتائیں کہ ہمارا پتہ کہاں سے چلا۔",consent:"بھیجنے سے پہلے خانے پر نشان لگا کر اتفاق کریں۔",
+  taken:"معذرت، یہ وقت ابھی ابھی بُک ہو گیا۔ کوئی اور وقت چُنیں۔",limit:"اس فون نمبر پر پہلے ہی 3 بکنگز کھلی ہیں۔ HS کو WhatsApp کریں۔",busy:"آج مزید آن لائن درخواستیں نہیں لی جا سکتیں۔ HS کو WhatsApp کریں۔",server:"ہماری طرف کوئی خرابی ہو گئی۔ دوبارہ کوشش کریں یا HS کو WhatsApp کریں۔",invalid:"فارم کی کوئی چیز پڑھی نہیں جا سکی۔ چیک کر کے دوبارہ کوشش کریں۔",network:"درخواست نہیں جا سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں، یا یہی تفصیل HS کو WhatsApp پر بھیج دیں۔",notfound:"اس ریفرنس نمبر اور فون نمبر کی کوئی بکنگ نہیں ملی۔"}},
+ko:{preview:"미리보기입니다. 예약은 아직 저장되거나 전송되지 않습니다.",
+ h1:"서울 병원 방문 예약",
+ lede:"진료 과목과 날짜, 시간을 선택하세요. HS가 병원에 확인하고, 역에서 만나 통역해 드립니다.",
+ steps:["진료 선택","날짜·시간","내 정보","전송"],
+ s1:"어떤 진료가 필요하신가요?",meet:"만나는 곳",or:"또는",clinic:"병원",pickLoc:"위치를 선택하세요",
+ needs:"구체적으로 무엇이 필요하신가요?",optional:"선택",next:"다음",back:"이전",
+ s2:"날짜 선택",s2hint:"최소 {n}일 전에 예약해 주세요. 수요일과 일요일은 휴무입니다.",
+ lgOpen:"예약 가능",lgBooked:"예약 완료",lgOff:"휴무",lgHol:"공휴일",off:"휴무",hol:"공휴일",full:"마감",
+ pickTime:"시간 선택",booked:"예약됨",
+ timeNote:"환자 한 분당 2시간을 배정하므로 앞뒤 시간도 예약됨으로 표시됩니다.",
+ satUro:"토요일에는 이 병원이 오후 1시 30분에 진료를 마칩니다.",
+ holTitle:"한국 공휴일",holBody:"공휴일에는 진료하는 병원과 쉬는 병원이 있습니다. 이 날짜는 WhatsApp으로 HS에게 문의해 주세요.",holBtn:"WhatsApp으로 문의",
+ urgent:"더 빠른 날짜가 필요하신가요?",urgentBtn:"WhatsApp으로 문의",
+ loading:"예약 가능한 시간을 불러오는 중…",loadErr:"예약 가능한 시간을 불러오지 못했습니다.",retry:"다시 시도",
+ s3:"내 정보",fName:"성명",fNameHint:"여권 또는 외국인등록증과 같은 영문 이름",
+ fDob:"생년월일",day:"일",month:"월",year:"년",fGender:"성별",male:"남성",female:"여성",
+ fNat:"국적",choose:"선택",natOther:"국적을 입력하세요",
+ fIns:"한국 건강보험에 가입되어 있나요?",yes:"예",no:"아니요",unsure:"모름",
+ fPhone:"전화번호",fPhoneHint:"한국 번호가 아니면 국가번호를 포함해 주세요 (예: +92)",
+ fContact:"예약 확정 안내를 어디로 받으시겠어요?",whatsapp:"WhatsApp",email:"이메일",waHint:"위 전화번호의 WhatsApp으로 안내해 드립니다.",
+ fEmail:"이메일 주소",fSrc:"어떻게 알게 되셨나요?",friend:"지인 소개",other:"기타",
+ fPeople:"진료받을 인원",p1:"본인만",p2:"2명",p3:"3명 이상",
+ fNote:"HS에게 전할 내용",fNotePh:"증상, 질문, 더 편한 시간 등",
+ s4:"확인 후 전송",visit:"방문 정보",you:"내 정보",
+ rTreat:"진료",rWhen:"날짜·시간",rWhere:"만나는 곳",rName:"성명",rDob:"생년월일",rGender:"성별",rNat:"국적",rIns:"건강보험",rPhone:"전화번호",rContact:"확정 안내",rSrc:"유입 경로",rPeople:"인원",rNote:"메모",
+ consent:"입력한 정보가 방문 예약에만 사용되고, 이 예약을 위해 병원에 전달되는 것에 동의합니다.",
+ submit:"예약 요청 보내기",sending:"전송 중…",edit:"수정",sendWa:"WhatsApp으로 보내기",
+ doneT:"요청이 접수되었습니다",doneB:"아직 확정된 예약이 아닙니다. HS가 병원에 확인한 뒤 1~2일 안에 {ch} 안내해 드립니다.",
+ chWa:"WhatsApp으로",chEmail:"이메일로",ref:"접수 번호",refKeep:"이 번호를 보관해 주세요. 예약 확인과 취소에 필요합니다.",doneWarn:"확정 안내를 받은 후에 방문해 주세요.",
+ doneWa:"WhatsApp으로 HS에게 연락",again:"다른 예약 하기",
+ footQ:"문의만 하실 건가요? 예약 없이도 가능합니다. WhatsApp:",
+ sample:"예약된 시간이 어떻게 보이는지 확인할 수 있도록 예시 예약을 표시했습니다.",
+ stLink:"이미 요청하셨나요? 진행 상태 확인",stBack:"예약으로 돌아가기",stTitle:"예약 확인",stRef:"접수 번호",stPhone:"예약 시 입력한 전화번호",stBtn:"상태 확인",checking:"확인 중…",cancelBtn:"예약 취소",cancelQ:"예약 {ref}을(를) 취소할까요? 취소 후에는 되돌릴 수 없습니다.",cancelYes:"네, 취소합니다",cancelNo:"예약 유지",cancelling:"취소 중…",cancelDone:"예약이 취소되었습니다. HS에게 전달되었으며, 이 시간은 다른 분이 예약할 수 있습니다.",
+ status:{pending:"확정 대기 중",proposed:"시간 변경 제안",confirmed:"예약 확정",cancelled:"취소됨",done:"방문 완료",noshow:"미방문"},
+ statusText:{pending:"HS가 병원에 확인 중입니다. 1~2일 안에 안내해 드립니다.",proposed:"HS가 아래 시간을 제안했습니다. 수락하시거나 다른 날짜를 원하시면 HS에게 답장해 주세요.",confirmed:"만나는 곳에서 뵙겠습니다. 여권 또는 외국인등록증을 지참해 주세요. 방문이 어려우시면 아래에서 취소해 주세요. 다른 분이 이 시간을 이용할 수 있습니다.",cancelled:"이 예약은 취소되었습니다. 다른 날짜로 다시 예약하실 수 있습니다.",done:"",noshow:""},
+ mHol:"안녕하세요 HS님, {date}(공휴일)에 {cat} 예약이 가능한가요?",
+ mUrg:"안녕하세요 HS님, {cat} 진료를 더 빠른 날짜로 받을 수 있을까요?",
+ mDone:"안녕하세요 HS님, {date} {time} {cat} 예약 요청을 보냈습니다. 접수 번호: {ref}",
+ mGen:"안녕하세요 HS님, 문의드립니다.",
+ err:{toolate:"방문 시간이 이미 지나 여기에서 취소할 수 없습니다. WhatsApp으로 HS에게 연락해 주세요.",closed:"이미 취소되었거나 완료된 예약입니다.",cat:"진료를 선택해 주세요.",loc:"위치를 선택해 주세요.",time:"날짜와 시간을 선택해 주세요.",name:"성명을 입력해 주세요.",dob:"생년월일을 모두 선택해 주세요.",gender:"성별을 선택해 주세요.",nat:"국적을 선택해 주세요.",ins:"건강보험 가입 여부를 선택해 주세요.",phone:"8~15자리 전화번호를 입력해 주세요.",contact:"WhatsApp 또는 이메일을 선택해 주세요.",email:"올바른 이메일 주소를 입력해 주세요.",src:"알게 된 경로를 선택해 주세요.",consent:"전송 전에 동의란에 체크해 주세요.",
+  taken:"죄송합니다. 방금 다른 분이 이 시간을 예약했습니다. 다른 시간을 선택해 주세요.",limit:"이 전화번호로 진행 중인 예약이 이미 3건 있습니다. WhatsApp으로 HS에게 문의해 주세요.",busy:"오늘은 온라인 예약 접수가 마감되었습니다. WhatsApp으로 HS에게 문의해 주세요.",server:"일시적인 오류가 발생했습니다. 다시 시도하시거나 WhatsApp으로 HS에게 문의해 주세요.",invalid:"입력 내용을 확인한 뒤 다시 시도해 주세요.",network:"전송하지 못했습니다. 인터넷 연결을 확인하고 다시 시도하시거나, 같은 내용을 WhatsApp으로 보내 주세요.",notfound:"입력하신 접수 번호와 전화번호에 해당하는 예약이 없습니다."}}
+};
+
+/* ---------- server calls ---------- */
+function call(req){
+  if(DEMO) return new Promise(function(res){setTimeout(function(){res(engine.handle(JSON.parse(JSON.stringify(req))));},300);});
+  const once=function(){
+    const ctl=new AbortController(), tm=setTimeout(function(){ctl.abort();},25000);
+    return fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(req),redirect:"follow",signal:ctl.signal})
+      .then(function(r){if(!r.ok)throw new Error("http "+r.status);return r.json();})
+      .finally(function(){clearTimeout(tm);});
+  };
+  return once().catch(function(){return new Promise(function(r){setTimeout(r,1200);}).then(once);});
+}
+const store={get:function(k){try{return localStorage.getItem(k)||"";}catch(e){return "";}},set:function(k,v){try{localStorage.setItem(k,v);}catch(e){/* private mode: nothing to remember */}}};
+const newId=function(){try{if(crypto.randomUUID)return crypto.randomUUID();}catch(e){/* fall through */}return "c"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,12);};
+
+/* ---------- state ---------- */
+const AV={state:"loading",today:P.seoulToday(),busy:[],closed:P.HOLIDAYS.map(function(h){return h[0];}),minNoticeDays:CFG.minNoticeDays,maxMonths:CFG.maxMonths,minDate:"",maxDate:""};
+AV.minDate=P.addDays(AV.today,AV.minNoticeDays);AV.maxDate=P.addMonths(AV.today,AV.maxMonths);
+const blankForm=function(){return {name:"",d:"",m:"",y:"",gender:"",nat:"",natOther:"",ins:"",phone:"",contact:"whatsapp",email:"",src:"",people:"1",note:"",consent:false,website:""};};
+const savedLang=store.get("pck-lang");
+const S={lang:STR[savedLang]?savedLang:"en",view:location.hash==="#status"?"status":"book",step:1,cat:null,loc:null,needs:[],month:AV.minDate.slice(0,7),date:null,time:null,err:null,ref:null,sending:false,clientId:newId(),f:blankForm(),
+  q:{ref:store.get("pck-ref"),phone:"",busy:false,err:null,res:null,ask:false,cancelled:false}};
+
+function setAvail(a){
+  AV.today=a.today;AV.busy=a.busy||[];AV.closed=a.closed||[];AV.minNoticeDays=a.minNoticeDays;AV.maxMonths=a.maxMonths;
+  AV.minDate=P.addDays(AV.today,AV.minNoticeDays);AV.maxDate=P.addMonths(AV.today,AV.maxMonths);AV.state="ready";
+  if(S.month<AV.minDate.slice(0,7))S.month=AV.minDate.slice(0,7);
+  if(S.month>AV.maxDate.slice(0,7))S.month=AV.maxDate.slice(0,7);
+  if(S.date){const st=P.dayState(S.date,curClinic(),AV.busy,AV);
+    if(st!=="open"&&st!=="holiday"){S.date=null;S.time=null;}
+    else if(S.time!=null&&!P.slotsFor(S.date,curClinic(),AV.busy).some(function(s){return s.t===S.time&&s.free;}))S.time=null;}
+}
+function loadAvail(){
+  AV.state="loading";
+  return call({action:"availability"}).then(function(a){if(a&&a.ok)setAvail(a);else AV.state="error";}).catch(function(){AV.state="error";})
+    .then(function(){if(S.view==="book"&&S.step===2)render();});
+}
+
+/* ---------- helpers ---------- */
+const $=function(s){return document.querySelector(s);};
+const esc=P.esc;
+const t=function(k){return STR[S.lang][k];};
+const L=function(o){return P.L(o,S.lang);};
+const fill=P.fill;
+const pad=function(n){return String(n).padStart(2,"0");};
+const wa=function(text){return P.waLink(P.WA,text);};
+const fmtTime=function(m){return P.fmtTime(m,S.lang);};
+const fmtDate=function(ds){return P.fmtDate(ds,S.lang);};
+const curCat=function(){return P.cat(S.cat);};
+function curClinic(){const c=curCat();if(!c)return null;return P.clinicFor(c.id,c.clinics.length>1?S.loc:c.clinics[0]);}
+const stHtml=function(st){return '<div class="st"><b>'+esc(P.stText(st,S.lang))+'</b><small class="ltr">'+esc(P.stSub(st,S.lang))+'</small></div>';};
+const meetText=function(cl){return P.meetText(cl,S.lang);};
+const clinicName=function(cl){return P.clinicName(cl,S.lang);};
+const chips=function(key,opts){return '<div class="chips">'+opts.map(function(o){return '<button type="button" class="chip" data-set="'+key+'" data-val="'+o[0]+'" aria-pressed="'+(String(S.f[key])===String(o[0]))+'">'+esc(o[1])+'</button>';}).join("")+'</div>';};
+const errBox=function(){return S.err?'<p class="err" role="alert">'+esc(t("err")[S.err]||t("err").server)+'</p>':"";};
+const summary=function(){const c=curCat(),cl=curClinic();return '<p class="sum"><b>'+esc(L(c.name))+'</b><span>'+esc(meetText(cl))+'</span>'+(S.step>2&&S.date&&S.time!=null?'<span>'+esc(fmtDate(S.date))+' · <span class="ltr">'+esc(fmtTime(S.time))+'</span></span>':"")+'</p>';};
+function payload(){
+  const f=S.f,c=curCat();
+  return {cat:S.cat,loc:c&&c.clinics.length>1?S.loc:"",needs:S.needs.slice(),date:S.date,start:S.time==null?"":P.hm(S.time),name:f.name,
+    dob:(f.y&&f.m&&f.d)?f.y+"-"+pad(f.m)+"-"+pad(f.d):"",gender:f.gender,nat:f.nat,natOther:f.natOther,ins:f.ins,phone:f.phone,contact:f.contact,
+    email:f.contact==="email"?f.email:"",src:f.src,people:f.people,note:f.note,lang:S.lang,consent:f.consent===true,clientId:S.clientId,website:f.website};
+}
+
+/* ---------- views ---------- */
+function meetPanel(c){
+  let b="";
+  if(c.clinics.length>1){
+    b+='<div class="pick">'+esc(t("pickLoc"))+'</div>'+c.clinics.map(function(k){const cl=P.CLINICS[k];
+      return '<button type="button" class="loc" data-loc="'+k+'" aria-pressed="'+(S.loc===k)+'"><i aria-hidden="true"></i>'+stHtml(cl.st[0])+'<span class="cl2">'+esc(clinicName(cl))+'</span></button>';}).join("");
+  }else{
+    const cl=P.CLINICS[c.clinics[0]];
+    b+=cl.st.map(stHtml).join('<span class="or">'+esc(t("or"))+'</span>');
+    b+='<div class="cl">'+esc(t("clinic"))+': '+esc(clinicName(cl))+'</div>';
+  }
+  return '<div class="meet"><div class="meet-h">'+esc(t("meet"))+'</div><div class="meet-b">'+b+'</div></div>';
+}
+function vStep1(){
+  const c=curCat();
+  let h='<section class="card"><h2>'+esc(t("s1"))+'</h2><div class="opts">'+P.CATS.map(function(k){return '<button type="button" class="opt" data-cat="'+k.id+'" aria-pressed="'+(S.cat===k.id)+'"><b>'+esc(L(k.name))+'</b><span>'+esc(L(k.hint))+'</span></button>';}).join("")+'</div>';
+  if(c){
+    h+='<div id="picked" class="block">'+meetPanel(c)+'</div>';
+    h+='<div class="field"><span class="lab">'+esc(t("needs"))+' <span class="opt-tag">('+esc(t("optional"))+')</span></span><div class="chips">'+c.needs.map(function(n,i){return '<button type="button" class="chip" data-need="'+i+'" aria-pressed="'+(S.needs.indexOf(i)>=0)+'">'+esc(L(n))+'</button>';}).join("")+'</div></div>';
+  }
+  return h+errBox()+'<div class="nav"><button type="button" class="btn" data-go="2">'+esc(t("next"))+'</button></div></section>';
+}
+function vStep2(){
+  const cl=curClinic(),c=curCat();
+  let h='<section class="card">'+summary()+'<h2>'+esc(t("s2"))+'</h2>';
+  if(AV.state==="loading"){
+    h+='<p class="wait" role="status"><i aria-hidden="true"></i>'+esc(t("loading"))+'</p>';
+  }else if(AV.state==="error"){
+    h+='<div class="notice"><b>'+esc(t("loadErr"))+'</b><div class="nav"><button type="button" class="btn" data-reload="1">'+esc(t("retry"))+'</button></div></div>';
+  }else{
+    const a=S.month.split("-").map(Number),lead=P.dow(S.month+"-01"),dim=new Date(Date.UTC(a[0],a[1],0)).getUTCDate();
+    let cells="";for(let i=0;i<lead;i++)cells+="<span></span>";
+    for(let d=1;d<=dim;d++){const ds=S.month+"-"+pad(d),st=P.dayState(ds,cl,AV.busy,AV);
+      let cls="na",lab="",dis=true;
+      if(st==="off"){cls="off";lab=t("off");}
+      else if(st==="holiday"){cls="hol";lab=t("hol");dis=false;}
+      else if(st==="full"){cls="full";lab=t("full");}
+      else if(st==="open"){cls="open";dis=false;}
+      if(S.date===ds&&!dis)cls+=" sel";
+      cells+='<button type="button" class="day '+cls+'" data-date="'+ds+'"'+(dis?" disabled":"")+' aria-label="'+esc(fmtDate(ds)+(lab?" · "+lab:""))+'" aria-pressed="'+(S.date===ds)+'"><b>'+d+'</b>'+(lab?"<small>"+esc(lab)+"</small>":"")+'</button>';}
+    h+='<p class="hint">'+esc(fill(t("s2hint"),{n:AV.minNoticeDays}))+'</p>';
+    h+='<div class="block"><div class="cal-h"><button type="button" data-month="-1" aria-label="Previous month"'+(S.month<=AV.minDate.slice(0,7)?" disabled":"")+'>‹</button><b>'+esc(P.monthTitle(S.month,S.lang))+'</b><button type="button" data-month="1" aria-label="Next month"'+(S.month>=AV.maxDate.slice(0,7)?" disabled":"")+'>›</button></div>';
+    h+='<div class="dow">'+P.DOW[S.lang].map(function(x){return "<span>"+x+"</span>";}).join("")+'</div><div class="days">'+cells+'</div>';
+    h+='<ul class="legend"><li class="l-a"><i></i>'+esc(t("lgOpen"))+'</li><li class="l-b"><i></i>'+esc(t("lgBooked"))+'</li><li class="l-o"><i></i>'+esc(t("lgOff"))+'</li><li class="l-h"><i></i>'+esc(t("lgHol"))+'</li></ul></div>';
+    if(S.date){
+      h+='<hr class="rule"><div class="block" id="times">';
+      if(AV.closed.indexOf(S.date)>=0){
+        h+='<div class="notice"><b>'+esc(t("holTitle"))+' · '+esc(fmtDate(S.date))+'</b><p>'+esc(t("holBody"))+'</p><a class="btn gold" target="_blank" rel="noopener" href="'+wa(fill(t("mHol"),{cat:L(c.name),date:fmtDate(S.date)}))+'">'+esc(t("holBtn"))+'</a></div>';
+      }else{
+        h+='<div class="label">'+esc(t("pickTime"))+' · '+esc(fmtDate(S.date))+'</div><div class="slots">'+P.slotsFor(S.date,cl,AV.busy).map(function(s){return s.free
+          ?'<button type="button" class="slot'+(S.time===s.t?" sel":"")+'" data-time="'+s.t+'" aria-pressed="'+(S.time===s.t)+'"><b>'+fmtTime(s.t)+'</b></button>'
+          :'<button type="button" class="slot taken" disabled><b>'+fmtTime(s.t)+'</b><small>'+esc(t("booked"))+'</small></button>';}).join("")+'</div>';
+        h+='<p class="tiny">'+esc(t("timeNote"))+(cl.satLast&&P.dow(S.date)===6?" "+esc(t("satUro")):"")+'</p>'+(DEMO?'<p class="tiny">'+esc(t("sample"))+'</p>':"");
+      }
+      h+='</div>';
+    }
+  }
+  h+='<div class="aside"><span>'+esc(t("urgent"))+'</span><a target="_blank" rel="noopener" href="'+wa(fill(t("mUrg"),{cat:L(c.name)}))+'">'+esc(t("urgentBtn"))+'</a></div>';
+  return h+errBox()+'<div class="nav"><button type="button" class="btn ghost" data-go="1">'+esc(t("back"))+'</button><button type="button" class="btn" data-go="3">'+esc(t("next"))+'</button></div></section>';
+}
+function vStep3(){
+  const f=S.f,yNow=Number(AV.today.slice(0,4));
+  const sel=function(key,ph,opts){return '<select id="f-'+key+'" data-f="'+key+'" aria-label="'+esc(ph)+'"><option value="">'+esc(ph)+'</option>'+opts.map(function(o){return '<option value="'+o[0]+'"'+(String(f[key])===String(o[0])?" selected":"")+'>'+esc(o[1])+'</option>';}).join("")+'</select>';};
+  const days=[],years=[];for(let i=1;i<=31;i++)days.push([i,i]);for(let i=yNow;i>=1930;i--)years.push([i,i]);
+  const months=(S.lang==="ko"?P.MON.en.map(function(x,i){return (i+1)+"월";}):(S.lang==="ur"?P.MON.ur:P.MON.en)).map(function(x,i){return [i+1,x];});
+  let h='<section class="card">'+summary()+'<h2>'+esc(t("s3"))+'</h2>';
+  h+='<div class="field"><label for="f-name">'+esc(t("fName"))+'</label><input type="text" id="f-name" data-f="name" class="ltr" autocomplete="name" maxlength="80" value="'+esc(f.name)+'"><p class="hint">'+esc(t("fNameHint"))+'</p></div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fDob"))+'</span><div class="dob">'+sel("d",t("day"),days)+sel("m",t("month"),months)+sel("y",t("year"),years)+'</div></div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fGender"))+'</span>'+chips("gender",[["male",t("male")],["female",t("female")]])+'</div>';
+  h+='<div class="field"><label for="f-nat">'+esc(t("fNat"))+'</label>'+sel("nat",t("choose"),P.NAT.map(function(n){return [n[0],L(n[1])];}))+(f.nat==="other"?'<input type="text" id="f-natOther" data-f="natOther" maxlength="40" aria-label="'+esc(t("natOther"))+'" placeholder="'+esc(t("natOther"))+'" value="'+esc(f.natOther)+'">':"")+'</div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fIns"))+'</span>'+chips("ins",[["yes",t("yes")],["no",t("no")],["unsure",t("unsure")]])+'</div>';
+  h+='<div class="field"><label for="f-phone">'+esc(t("fPhone"))+'</label><input type="tel" id="f-phone" data-f="phone" class="ltr" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="010-1234-5678" value="'+esc(f.phone)+'"><p class="hint">'+esc(t("fPhoneHint"))+'</p></div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fContact"))+'</span>'+chips("contact",[["whatsapp",t("whatsapp")],["email",t("email")]])+(f.contact==="whatsapp"?'<p class="hint">'+esc(t("waHint"))+'</p>':'<input type="email" id="f-email" data-f="email" class="ltr" autocomplete="email" maxlength="120" aria-label="'+esc(t("fEmail"))+'" placeholder="name@example.com" value="'+esc(f.email)+'">')+'</div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fSrc"))+'</span>'+chips("src",[["tiktok","TikTok"],["facebook","Facebook"],["instagram","Instagram"],["friend",t("friend")],["other",t("other")]])+'</div>';
+  h+='<div class="field"><span class="lab">'+esc(t("fPeople"))+'</span>'+chips("people",[["1",t("p1")],["2",t("p2")],["3",t("p3")]])+'</div>';
+  h+='<div class="field"><label for="f-note">'+esc(t("fNote"))+' <span class="opt-tag">('+esc(t("optional"))+')</span></label><textarea id="f-note" data-f="note" maxlength="600" placeholder="'+esc(t("fNotePh"))+'">'+esc(f.note)+'</textarea></div>';
+  h+='<div class="hp" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" data-f="website" tabindex="-1" autocomplete="off" value=""></div>';
+  return h+errBox()+'<div class="nav"><button type="button" class="btn ghost" data-go="2">'+esc(t("back"))+'</button><button type="button" class="btn" data-go="4">'+esc(t("next"))+'</button></div></section>';
+}
+function vStep4(){
+  const f=S.f,c=curCat(),cl=curClinic();
+  const row=function(k,v){return v?"<dt>"+esc(t(k))+"</dt><dd>"+v+"</dd>":"";};
+  const needs=P.needsText(c.id,S.needs,S.lang);
+  const src={tiktok:"TikTok",facebook:"Facebook",instagram:"Instagram",friend:t("friend"),other:t("other")}[f.src];
+  let h='<section class="card"><h2>'+esc(t("s4"))+'</h2>';
+  h+='<div class="block"><div class="block-h"><span class="label">'+esc(t("visit"))+'</span><button type="button" class="link" data-go="1">'+esc(t("edit"))+'</button></div><dl class="review">'
+    +row("rTreat",esc(L(c.name))+(needs?'<br><span class="opt-tag">'+esc(needs)+'</span>':""))
+    +row("rWhen",esc(fmtDate(S.date))+' · <span class="ltr">'+esc(fmtTime(S.time))+'</span>')
+    +row("rWhere",esc(meetText(cl))+'<br><span class="opt-tag">'+esc(clinicName(cl))+'</span>')+'</dl></div><hr class="rule">';
+  h+='<div class="block"><div class="block-h"><span class="label">'+esc(t("you"))+'</span><button type="button" class="link" data-go="3">'+esc(t("edit"))+'</button></div><dl class="review">'
+    +row("rName",'<span class="ltr">'+esc(f.name.trim())+'</span>')
+    +row("rDob",'<span class="ltr">'+esc(f.d+" "+P.MON.en[f.m-1].slice(0,3)+" "+f.y)+'</span>')
+    +row("rGender",esc(t(f.gender)))
+    +row("rNat",esc(P.natName(f.nat,f.natOther.trim(),S.lang)))
+    +row("rIns",esc(t(f.ins)))
+    +row("rPhone",'<span class="ltr">'+esc(f.phone.trim())+'</span>')
+    +row("rContact",f.contact==="whatsapp"?esc(t("whatsapp")):esc(t("email"))+' · <span class="ltr">'+esc(f.email.trim())+'</span>')
+    +row("rSrc",esc(src))
+    +row("rPeople",esc(t("p"+f.people)))
+    +row("rNote",f.note.trim()?esc(f.note.trim()):"")+'</dl></div><hr class="rule">';
+  h+='<label class="consent"><input type="checkbox" id="f-consent" data-f="consent"'+(f.consent?" checked":"")+'><span>'+esc(t("consent"))+'</span></label>';
+  h+=errBox();
+  if(S.err==="network"||S.err==="server"){
+    const lines=P.detailLines(Object.assign(payload(),{ref:""}),AV.today).map(function(r){return r[0]+": "+r[1];}).join("\n");
+    h+='<div class="nav"><a class="btn ghost" style="flex:1" target="_blank" rel="noopener" href="'+wa("Booking request (the online form could not send it)\n"+lines)+'">'+esc(t("sendWa"))+'</a></div>';
+  }
+  return h+'<div class="nav"><button type="button" class="btn ghost" data-go="3"'+(S.sending?" disabled":"")+'>'+esc(t("back"))+'</button><button type="button" class="btn gold" data-submit="1"'+(S.sending?" disabled":"")+'>'+esc(S.sending?t("sending"):t("submit"))+'</button></div></section>';
+}
+function vDone(){
+  const c=curCat(),cl=curClinic();
+  let h='<section class="card"><h2>'+esc(t("doneT"))+'</h2><div class="ref"><span>'+esc(t("ref"))+'</span><b>'+esc(S.ref)+'</b></div><p class="tiny">'+esc(t("refKeep"))+'</p>';
+  h+='<p class="hint">'+esc(fill(t("doneB"),{ch:t(S.f.contact==="whatsapp"?"chWa":"chEmail")}))+'</p><p class="warn">'+esc(t("doneWarn"))+'</p>';
+  h+='<dl class="review"><dt>'+esc(t("rTreat"))+'</dt><dd>'+esc(L(c.name))+'</dd><dt>'+esc(t("rWhen"))+'</dt><dd>'+esc(fmtDate(S.date))+' · <span class="ltr">'+esc(fmtTime(S.time))+'</span></dd><dt>'+esc(t("rWhere"))+'</dt><dd>'+esc(meetText(cl))+'</dd></dl>';
+  h+='<div class="nav"><a class="btn gold" target="_blank" rel="noopener" href="'+wa(fill(t("mDone"),{ref:S.ref,cat:L(c.name),date:fmtDate(S.date),time:S.lang==="ur"?"\u2066"+fmtTime(S.time)+"\u2069":fmtTime(S.time)}))+'">'+esc(t("doneWa"))+'</a></div>';
+  return h+'<div class="nav"><button type="button" class="btn ghost" style="flex:1" data-again="1">'+esc(t("again"))+'</button></div></section>';
+}
+function vStatus(){
+  const q=S.q;
+  let h='<section class="card"><h2>'+esc(t("stTitle"))+'</h2>';
+  h+='<div class="field"><label for="q-ref">'+esc(t("stRef"))+'</label><input type="text" id="q-ref" data-q="ref" class="ltr" autocomplete="off" autocapitalize="characters" maxlength="20" placeholder="PCK-1116-ABC" value="'+esc(q.ref)+'"></div>';
+  h+='<div class="field"><label for="q-phone">'+esc(t("stPhone"))+'</label><input type="tel" id="q-phone" data-q="phone" class="ltr" inputmode="tel" autocomplete="tel" maxlength="30" value="'+esc(q.phone)+'"></div>';
+  if(q.err&&!q.res)h+='<p class="err" role="alert">'+esc(t("err")[q.err]||t("err").server)+'</p>';
+  h+='<div class="nav"><button type="button" class="btn" data-check="1"'+(q.busy?" disabled":"")+'>'+esc(q.busy?t("checking"):t("stBtn"))+'</button></div>';
+  if(q.res){
+    const r=q.res,c=P.cat(r.cat),cl=P.clinicFor(r.cat,r.loc),tm=P.parseHm(r.start),live=r.status==="pending"||r.status==="proposed"||r.status==="confirmed";
+    h+='<hr class="rule"><div class="block" id="result">'+(q.err?'<p class="err" role="alert">'+esc(t("err")[q.err]||t("err").server)+'</p>':"")+'<span class="pill '+esc(r.status)+'">'+esc(t("status")[r.status]||r.status)+'</span>';
+    if(t("statusText")[r.status])h+='<p class="hint">'+esc(t("statusText")[r.status])+'</p>';
+    h+='<dl class="review"><dt>'+esc(t("ref"))+'</dt><dd><span class="ltr">'+esc(r.ref)+'</span></dd><dt>'+esc(t("rTreat"))+'</dt><dd>'+esc(c?L(c.name):r.cat)+'</dd><dt>'+esc(t("rWhen"))+'</dt><dd>'+esc(fmtDate(r.date))+' · <span class="ltr">'+esc(isNaN(tm)?r.start:fmtTime(tm))+'</span></dd>'
+      +(live&&cl?'<dt>'+esc(t("rWhere"))+'</dt><dd>'+esc(meetText(cl))+'<br><span class="opt-tag">'+esc(clinicName(cl))+'</span></dd>':"")+'</dl>';
+    if(q.cancelled)h+='<p class="okbox" role="status">'+esc(t("cancelDone"))+'</p>';
+    else if(r.canCancel&&!q.ask)h+='<div class="nav"><button type="button" class="btn ghost danger" style="flex:1" data-cask="1">'+esc(t("cancelBtn"))+'</button></div>';
+    else if(r.canCancel)h+='<div class="notice" id="cq"><b>'+esc(fill(t("cancelQ"),{ref:r.ref}))+'</b><div class="nav"><button type="button" class="btn ghost" data-cno="1">'+esc(t("cancelNo"))+'</button><button type="button" class="btn danger" data-cyes="1"'+(q.busy?" disabled":"")+'>'+esc(q.busy?t("cancelling"):t("cancelYes"))+'</button></div></div>';
+    h+='</div>';
+  }
+  return h+'</section>';
+}
+
+/* ---------- render + events ---------- */
+function render(scroll){
+  const html=document.documentElement;html.lang=S.lang;html.dir=S.lang==="ur"?"rtl":"ltr";
+  document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===S.lang);});
+  const pv=$("#pv");pv.hidden=!DEMO;pv.textContent=t("preview");
+  $("#h1").textContent=t("h1");
+  $("#lede").hidden=S.view==="status";$("#lede").textContent=t("lede");
+  const sw=$("#swap");sw.textContent=S.view==="status"?t("stBack"):t("stLink");sw.setAttribute("href",S.view==="status"?"#book":"#status");
+  const steps=$("#steps");steps.hidden=S.view==="status";
+  steps.innerHTML=t("steps").map(function(s,i){return '<li class="'+(i+1<S.step?"done":i+1===S.step?"now":"")+'"'+(i+1===S.step?' aria-current="step"':"")+'>'+(i+1)+'. '+esc(s)+'</li>';}).join("");
+  $("#footQ").textContent=t("footQ");$("#footNum").href=wa(t("mGen"));
+  $("#app").innerHTML=S.view==="status"?vStatus():[null,vStep1,vStep2,vStep3,vStep4,vDone][S.step]();
+  if(scroll){const el=typeof scroll==="string"?$(scroll):$(".hero");if(el)el.scrollIntoView({block:typeof scroll==="string"?"nearest":"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}
+}
+function check(step){
+  if(step===1){const c=curCat();if(!c)return "cat";if(c.clinics.length>1&&!S.loc)return "loc";return null;}
+  if(step===2){if(AV.state!=="ready"||!S.date||S.time==null||AV.closed.indexOf(S.date)>=0)return "time";
+    return P.slotsFor(S.date,curClinic(),AV.busy).some(function(s){return s.t===S.time&&s.free;})?null:"time";}
+  if(step===3){const v=P.cleanBooking(Object.assign(payload(),{consent:true}),AV,false);return v.error||null;}
+  return null;
+}
+const stepOf=function(e){return e==="cat"||e==="loc"?1:e==="time"||e==="taken"?2:3;};
+function go(n){
+  if(n>S.step){for(let s=S.step;s<n;s++){const e=check(s);if(e){S.err=e;S.step=Math.min(s,stepOf(e));render();const eb=$(".err");if(eb)eb.scrollIntoView({block:"center"});return;}}}
+  S.err=null;S.step=n;render(true);
+}
+function submit(){
+  if(S.sending)return;
+  if(!S.f.consent){S.err="consent";render();return;}
+  const e=check(1)||check(2)||check(3);if(e){S.step=stepOf(e);S.err=e;render(true);return;}
+  S.sending=true;S.err=null;render();
+  call({action:"book",booking:payload()}).then(function(r){
+    S.sending=false;
+    if(r&&r.ok){S.ref=r.ref;S.step=5;S.err=null;store.set("pck-ref",r.ref);S.q.ref=r.ref;render(true);loadAvail();return;}
+    const err=(r&&r.error)||"server";
+    if(err==="taken"){if(r.avail&&r.avail.ok)setAvail(r.avail);S.time=null;S.step=2;S.err="taken";render(true);return;}
+    S.err=t("err")[err]?err:"server";
+    if(err!=="limit"&&err!=="busy"&&err!=="server"&&err!=="invalid")S.step=stepOf(err);
+    render();const eb=$(".err");if(eb)eb.scrollIntoView({block:"center"});
+  }).catch(function(){S.sending=false;S.err="network";render();const eb=$(".err");if(eb)eb.scrollIntoView({block:"center"});});
+}
+function checkStatus(){
+  const q=S.q;if(q.busy)return;
+  q.busy=true;q.err=null;q.res=null;q.ask=false;q.cancelled=false;render();
+  call({action:"status",ref:q.ref,phone:q.phone}).then(function(r){q.busy=false;if(r&&r.ok)q.res=r;else q.err=(r&&r.error==="notfound")?"notfound":"server";render(q.res?"#result":null);})
+    .catch(function(){q.busy=false;q.err="network";render();});
+}
+function cancelBooking(){
+  const q=S.q;if(q.busy||!q.res)return;
+  q.busy=true;q.err=null;render("#cq");
+  call({action:"cancel",ref:q.res.ref,phone:q.phone}).then(function(r){
+    q.busy=false;q.ask=false;
+    if(r&&r.ok){q.res=r;q.cancelled=true;loadAvail();}
+    else{q.err=(r&&r.error)||"server";if(q.err==="closed"||q.err==="toolate")q.res.canCancel=false;}
+    render("#result");
+  }).catch(function(){q.busy=false;q.err="network";render("#result");});
+}
+document.addEventListener("click",function(ev){
+  const el=ev.target.closest("button");if(!el)return;const d=el.dataset;
+  if(d.lang){S.lang=d.lang;store.set("pck-lang",S.lang);render();return;}
+  if(d.cat){if(S.cat!==d.cat){S.cat=d.cat;S.loc=null;S.needs=[];S.date=null;S.time=null;S.clientId=newId();}S.err=null;render("#picked");return;}
+  if(d.loc){S.loc=d.loc;S.date=null;S.time=null;S.err=null;render();return;}
+  if(d.need!==undefined){const i=Number(d.need),k=S.needs.indexOf(i);if(k<0)S.needs.push(i);else S.needs.splice(k,1);render();return;}
+  if(d.go){go(Number(d.go));return;}
+  if(d.reload){loadAvail();render();return;}
+  if(d.month){S.month=P.addMonths(S.month+"-01",Number(d.month)).slice(0,7);render();return;}
+  if(d.date){S.date=d.date;S.time=null;S.err=null;render("#times");return;}
+  if(d.time){S.time=Number(d.time);S.err=null;render();return;}
+  if(d.set){S.f[d.set]=d.val;S.err=null;render();return;}
+  if(d.submit){submit();return;}
+  if(d.check){checkStatus();return;}
+  if(d.cask){S.q.ask=true;S.q.err=null;render("#cq");return;}
+  if(d.cno){S.q.ask=false;render("#result");return;}
+  if(d.cyes){cancelBooking();return;}
+  if(d.again){Object.assign(S,{step:1,cat:null,loc:null,needs:[],month:AV.minDate.slice(0,7),date:null,time:null,err:null,ref:null,sending:false,clientId:newId(),f:blankForm()});render(true);}
+});
+function onField(ev){
+  const ds=ev.target.dataset||{};
+  if(ds.q){S.q[ds.q]=ev.target.value;return;}
+  const k=ds.f;if(!k)return;
+  S.f[k]=ev.target.type==="checkbox"?ev.target.checked:ev.target.value;
+  if(k==="nat"&&ev.type==="change"){render();const o=$("#f-natOther");if(o)o.focus();}
+}
+document.addEventListener("input",onField);document.addEventListener("change",onField);
+window.addEventListener("hashchange",function(){S.view=location.hash==="#status"?"status":"book";S.q.err=null;render(true);});
+render();
+loadAvail();
+})();
+</script>
+</body>
+</html>
