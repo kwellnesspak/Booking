@@ -398,7 +398,10 @@ const newId=function(){try{if(crypto.randomUUID)return crypto.randomUUID();}catc
 const AV={state:"loading",today:P.seoulToday(),busy:[],closed:P.HOLIDAYS.map(function(h){return h[0];}),minNoticeDays:CFG.minNoticeDays,maxMonths:CFG.maxMonths,minDate:"",maxDate:""};
 AV.minDate=P.addDays(AV.today,AV.minNoticeDays);AV.maxDate=P.addMonths(AV.today,AV.maxMonths);
 const blankForm=function(){return {name:"",d:"",m:"",y:"",gender:"",nat:"",natOther:"",ins:"",phone:"",contact:"whatsapp",email:"",src:"",people:"1",note:"",consent:false,website:""};};
-const savedLang=store.get("pck-lang");
+/* A link or QR with ?lang=ur (or en / ko) opens in that language and remembers it; otherwise the last choice, else English. */
+const urlLang=(function(){try{return new URLSearchParams(location.search).get("lang")||"";}catch(e){return "";}})();
+if(STR[urlLang])store.set("pck-lang",urlLang);
+const savedLang=STR[urlLang]?urlLang:store.get("pck-lang");
 const S={lang:STR[savedLang]?savedLang:"en",view:location.hash==="#status"?"status":"book",step:1,cat:null,loc:null,needs:[],month:AV.minDate.slice(0,7),date:null,time:null,err:null,ref:null,sending:false,clientId:newId(),f:blankForm(),
   q:{ref:store.get("pck-ref"),phone:"",busy:false,err:null,res:null,ask:false,cancelled:false}};
 
